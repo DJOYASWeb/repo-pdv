@@ -317,7 +317,7 @@
             padding: 0.5rem 0.85rem;
             border-top: 1px solid #f0f0f0;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             gap: 0.4rem;
         }
 
@@ -325,6 +325,7 @@
             font-size: 0.7rem;
             color: #888;
             white-space: nowrap;
+            width: 100%;
         }
 
         .qty-input {
@@ -613,14 +614,16 @@
         // Sección cantidad
         let quantitySection = '';
         if (!isUnavailable) {
-            quantitySection = `
+quantitySection = `
                 <div class="card-quantity">
                     <label>Cantidad a Distribuir</label>
-                    <input type="number" class="qty-input" id="qty-${p.id}"
-                           value="${qty}" min="1" max="${p.stock}"
-                           onclick="event.stopPropagation()"
-                           onchange="updateQty(${p.id}, this.value)">
-                    ${!isSelected ? `<button class="btn-asignar" onclick="event.stopPropagation(); assignProduct(${p.id})">Asignar</button>` : ''}
+                    <div style="display:flex; gap:0.4rem; align-items:center;">
+                        <input type="number" class="qty-input" id="qty-${p.id}"
+                               value="${qty}" min="1" max="${p.stock}"
+                               onclick="event.stopPropagation()"
+                               onchange="updateQty(${p.id}, this.value)">
+                        ${!isSelected ? `<button class="btn-asignar" onclick="event.stopPropagation(); assignProduct(${p.id})">Asignar</button>` : ''}
+                    </div>
                 </div>`;
         }
 
