@@ -1070,9 +1070,8 @@ function openEditQuantityModal(detalleId, productoNombre, cantidadActual, stockD
     new bootstrap.Modal(document.getElementById('editQuantityModal')).show();
 }
 
-/* ---- Selección masiva ---- */
 function openMassiveSelection() {
-    const popup = window.open('modules/bodega/distribucion/distribucion_productos_seleccion_masiva.php?id=265', 'seleccionMasiva', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+    const popup = window.open('seleccion_masiva_tabla.html', 'seleccionMasiva', 'width=1200,height=800,scrollbars=yes,resizable=yes');
     if (popup) popup.focus();
     else alert('Permita las ventanas emergentes para usar esta función.');
 }
@@ -1080,6 +1079,7 @@ function openMassiveSelection() {
 function openMassiveSelectionCards() {
     const popup = window.open('seleccion_masiva_cards.html', 'seleccionMasivaCards', 'width=1400,height=900,scrollbars=yes,resizable=yes');
     if (popup) popup.focus();
+    else alert('Permita las ventanas emergentes para usar esta función.');
 }
 
 /* ---- Validación select producto ---- */
