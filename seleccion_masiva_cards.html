@@ -618,7 +618,7 @@
         const isSelected  = !!selectedProducts[p.id];
         const isClicked   = clickedCards.has(p.id);
         const isUnavailable = p.stock <= 0 && !isSelected;
-        const qty = selectedProducts[p.id] || 1;
+        const qty = selectedProducts[p.id] || prevQuantities[p.id] || 1;
 
         const imgHtml = p.img
             ? `<img src="${p.img}" alt="${p.name}" onerror="handleImgError(this)">`
