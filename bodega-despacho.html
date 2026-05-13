@@ -1084,8 +1084,9 @@ body {
                             </div>
                             <div style="display:flex; align-items:center; justify-content:space-between; gap:0.5rem;">
                                 <span style="font-size:0.82rem; color:#444;">Precio Tienda</span>
-                                <input type="number" id="cp_nuevo_tienda" placeholder=""
-                                       style="border:1.5px solid #e0e0e0; border-radius:6px; padding:0.4rem 0.75rem; font-size:0.85rem; width:110px; text-align:right;">
+                               <input type="number" id="cp_nuevo_tienda" placeholder=""
+                                oninput="ajustarDesdeTienda()"
+                                style="border:1.5px solid #e0e0e0; border-radius:6px; padding:0.4rem 0.75rem; font-size:0.85rem; width:110px; text-align:right;">
                             </div>
                         </div>
                     </div>
@@ -1398,7 +1399,17 @@ function openCambioPrecioModal(detalleId, productoNombre, pesoGr, precioTienda, 
 function calcularSugerido() {
     const peso  = parseFloat(document.getElementById('cp_peso').value) || 0;
     const valor = parseFloat(document.getElementById('cp_valor_gramo').value) || 0;
-    document.getElementById('cp_sugerido').value = peso && valor ? Math.round(peso * valor).toLocaleString('es-CL') : '';
+    const sugerido = peso && valor ? Math.round(peso * valor) : 0;
+    document.getElementById('cp_sugerido').value = sugerido ? sugerido.toLocaleString('es-CL') : '';
+    if (sugerido) {
+        document.getElementById('cp_nuevo_tienda').value     = sugerido;
+        document.getElementById('cp_nuevo_prestashop').value = Math.round(sugerido / 2);
+    }
+}
+
+function ajustarDesdeTienda() {
+    const tienda = parseFloat(document.getElementById('cp_nuevo_tienda').value) || 0;
+    document.getElementById('cp_nuevo_prestashop').value = tienda ? Math.round(tienda / 2) : '';
 }
 
 function usarSugerido() {
