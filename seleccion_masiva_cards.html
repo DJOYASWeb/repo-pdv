@@ -628,7 +628,8 @@
             if (isSelected) {
                 topBanner = `<div class="selected-banner"><i class="fas fa-check-circle"></i> ${qty} Unidades</div>`;
             } else if (!isUnavailable) {
-                topBanner = `<div class="stock-banner"><i class="fas fa-box"></i> Stock: ${p.stock}</div>`;
+                const prevQty = prevQuantities[p.id];
+                topBanner = `<div class="stock-banner"><i class="fas fa-box"></i> Stock: ${p.stock}${prevQty ? ` · Anterior: ${prevQty}` : ''}</div>`;
             }
 
         // Sección cantidad
