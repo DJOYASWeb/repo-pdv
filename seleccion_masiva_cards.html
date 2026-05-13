@@ -628,7 +628,7 @@
         let topBanner = '';
             if (isSelected) {
                 topBanner = `<div class="selected-banner"><i class="fas fa-check-circle"></i> ${qty} Unidades</div>`;
-            } else if (isClicked && !isUnavailable) {
+            } else if (!isUnavailable) {
                 topBanner = `<div class="stock-banner"><i class="fas fa-box"></i> Stock: ${p.stock}</div>`;
             }
 
