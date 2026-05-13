@@ -377,25 +377,29 @@ body {
 }
 
 .thead-filter-input {
-    border: none;
+    border: 1.5px solid var(--border);
+    border-radius: 5px;
     padding: 0.3rem 0.5rem;
     font-size: 0.75rem;
     width: 100%;
     outline: none;
-    color: var(--text-muted);
-    background: transparent;
+    color: var(--text-main);
+    transition: var(--transition);
+    background: #fff;
 }
 
+.thead-filter-input:focus { border-color: #aaa; }
 .thead-filter-input::placeholder { color: #ccc; }
 
 .thead-filter-select {
-    border: none;
+    border: 1.5px solid var(--border);
+    border-radius: 5px;
     padding: 0.3rem 0.4rem;
     font-size: 0.75rem;
     width: 100%;
     outline: none;
-    color: var(--text-muted);
-    background: transparent;
+    color: var(--text-main);
+    background: #fff;
     cursor: pointer;
 }
 
