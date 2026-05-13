@@ -562,6 +562,7 @@
        ESTADO
        ============================================================ */
         let selectedProducts = {}; // { id: cantidad }
+        let prevQuantities = {};   // guarda la última cantidad asignada
         let clickedCards = new Set();
         let activeMaterial = null;
         let filterSinDistribuir = false;
@@ -747,19 +748,20 @@
             }
         }
 
-    function assignProduct(id) {
-        const input = document.getElementById(`qty-${id}`);
-        const qty   = input ? parseInt(input.value) || 1 : 1;
-        const p     = PRODUCTS.find(x => x.id === id);
-        if (!p || p.stock <= 0) return;
-        if (qty > p.stock) {
-            alert(`La cantidad no puede superar el stock disponible (${p.stock})`);
-            return;
+        function assignProduct(id) {
+            const input = document.getElementById(`qty-${id}`);
+            const qty   = input ? parseInt(input.value) || 1 : 1;
+            const p     = PRODUCTS.find(x => x.id === id);
+            if (!p || p.stock <= 0) return;
+            if (qty > p.stock) {
+                alert(`La cantidad no puede superar el stock disponible (${p.stock})`);
+                return;
+            }
+            selectedProducts[id] = qty;
+            prevQuantities[id]   = qty;
+            saveToParent(id, qty);
+            renderGrid();
         }
-        selectedProducts[id] = qty;
-        saveToParent(id, qty);
-        renderGrid();
-    }
 
         function removeProduct(id) {
             delete selectedProducts[id];
