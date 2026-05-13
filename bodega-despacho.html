@@ -935,7 +935,8 @@ body {
                                             <i class="fas fa-edit"></i>
                                         </button>
                                         <button class="action-btn primary"
-                                                 title="Editar cantidad">
+                                                onclick="openCambioPrecioModal(3594, 'PANAC101239000', 2.36, 9800, 4900)"
+                                                title="Cambio de precio">
                                             <i class="fas fa-dollar-sign"></i>
                                         </button>
 
@@ -1003,6 +1004,107 @@ body {
         </div>
     </div>
 </div>
+
+
+
+
+<!-- ============================================================
+     MODAL: Cambio de Precio
+     ============================================================ -->
+<div class="modal fade" id="cambiarPrecioModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Solicitud Cambio de Precio</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+
+                <!-- Calculadora valor sugerido -->
+                <div style="background:#fff0ed; border-radius:10px; padding:1.25rem; margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem;">
+                    <div style="width:70px; height:70px; background:#f5f5f5; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                        <i class="fas fa-gem" style="color:#ccc; font-size:1.5rem;"></i>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap; flex:1;">
+                        <div>
+                            <div style="font-size:0.7rem; color:#888; margin-bottom:4px;">Peso del Producto</div>
+                            <input type="text" id="cp_peso" value="2.36 gr" readonly
+                                   style="border:1.5px solid #e0e0e0; border-radius:6px; padding:0.4rem 0.75rem; font-size:0.85rem; width:100px; background:#fff;">
+                        </div>
+                        <span style="font-size:1.1rem; color:#888; margin-top:16px;">×</span>
+                        <div>
+                            <div style="font-size:0.7rem; color:#888; margin-bottom:4px;">Valor Gramo</div>
+                            <input type="number" id="cp_valor_gramo" placeholder=""
+                                   oninput="calcularSugerido()"
+                                   style="border:1.5px solid #e0e0e0; border-radius:6px; padding:0.4rem 0.75rem; font-size:0.85rem; width:110px;">
+                        </div>
+                        <span style="font-size:1.1rem; color:#888; margin-top:16px;">=</span>
+                        <div>
+                            <div style="font-size:0.7rem; color:#888; margin-bottom:4px; font-weight:700;">Valor Sugerido</div>
+                            <div style="display:flex; gap:0.5rem; align-items:center;">
+                                <input type="text" id="cp_sugerido" readonly placeholder=""
+                                       style="border:1.5px solid #e0e0e0; border-radius:6px; padding:0.4rem 0.75rem; font-size:0.85rem; width:110px; background:#fff;">
+                                <button onclick="usarSugerido()"
+                                        style="background:#111; color:#fff; border:none; border-radius:6px; padding:0.4rem 0.9rem; font-size:0.8rem; font-weight:600; cursor:pointer;">
+                                    Solicitar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Precios actuales vs nuevos -->
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+
+                    <!-- Precio Asignado en Bodega -->
+                    <div>
+                        <div style="font-size:0.82rem; font-weight:600; margin-bottom:0.75rem;">Precio Asignado en Bodega</div>
+                        <div style="background:#f5f5f5; border-radius:10px; padding:1.25rem; display:flex; flex-direction:column; gap:0.85rem;">
+                            <div style="display:flex; align-items:center; justify-content:space-between; gap:0.5rem;">
+                                <span style="font-size:0.82rem; color:#444;">Precio Prestashop</span>
+                                <input type="text" id="cp_actual_prestashop" readonly value="4.900"
+                                       style="border:1.5px solid #e0e0e0; border-radius:6px; padding:0.4rem 0.75rem; font-size:0.85rem; width:110px; background:#fff; text-align:right;">
+                            </div>
+                            <div style="display:flex; align-items:center; justify-content:space-between; gap:0.5rem;">
+                                <span style="font-size:0.82rem; color:#444;">Precio Tienda</span>
+                                <input type="text" id="cp_actual_tienda" readonly value="9.800"
+                                       style="border:1.5px solid #e0e0e0; border-radius:6px; padding:0.4rem 0.75rem; font-size:0.85rem; width:110px; background:#fff; text-align:right;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Solicitud Nuevo Precio -->
+                    <div>
+                        <div style="font-size:0.82rem; font-weight:600; margin-bottom:0.75rem;">Solicitud <strong>NUEVO</strong> Precio</div>
+                        <div style="background:#fff; border:2px solid #111; border-radius:10px; padding:1.25rem; display:flex; flex-direction:column; gap:0.85rem;">
+                            <div style="display:flex; align-items:center; justify-content:space-between; gap:0.5rem;">
+                                <span style="font-size:0.82rem; color:#444;">Precio Prestashop</span>
+                                <input type="number" id="cp_nuevo_prestashop" placeholder=""
+                                       style="border:1.5px solid #e0e0e0; border-radius:6px; padding:0.4rem 0.75rem; font-size:0.85rem; width:110px; text-align:right;">
+                            </div>
+                            <div style="display:flex; align-items:center; justify-content:space-between; gap:0.5rem;">
+                                <span style="font-size:0.82rem; color:#444;">Precio Tienda</span>
+                                <input type="number" id="cp_nuevo_tienda" placeholder=""
+                                       style="border:1.5px solid #e0e0e0; border-radius:6px; padding:0.4rem 0.75rem; font-size:0.85rem; width:110px; text-align:right;">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-dj btn-dj-outline" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn-dj btn-dj-dark" onclick="guardarCambioPrecio()">
+                    <i class="fas fa-save me-1"></i>Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 
 <!-- ============================================================
      MODAL: Asignar Sucursales
@@ -1280,6 +1382,42 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(() => bootstrap.Alert.getOrCreateInstance(alert)?.close(), 8000);
     });
 });
+
+
+function openCambioPrecioModal(detalleId, productoNombre, pesoGr, precioTienda, precioPrestashop) {
+    document.getElementById('cp_peso').value              = pesoGr + ' gr';
+    document.getElementById('cp_actual_tienda').value     = precioTienda;
+    document.getElementById('cp_actual_prestashop').value = precioPrestashop;
+    document.getElementById('cp_valor_gramo').value       = '';
+    document.getElementById('cp_sugerido').value          = '';
+    document.getElementById('cp_nuevo_tienda').value      = '';
+    document.getElementById('cp_nuevo_prestashop').value  = '';
+    new bootstrap.Modal(document.getElementById('cambiarPrecioModal')).show();
+}
+
+function calcularSugerido() {
+    const peso  = parseFloat(document.getElementById('cp_peso').value) || 0;
+    const valor = parseFloat(document.getElementById('cp_valor_gramo').value) || 0;
+    document.getElementById('cp_sugerido').value = peso && valor ? Math.round(peso * valor).toLocaleString('es-CL') : '';
+}
+
+function usarSugerido() {
+    const sugerido = document.getElementById('cp_sugerido').value.replace(/\./g, '');
+    if (sugerido) {
+        document.getElementById('cp_nuevo_tienda').value     = sugerido;
+        document.getElementById('cp_nuevo_prestashop').value = Math.round(parseInt(sugerido) / 2);
+    }
+}
+
+function guardarCambioPrecio() {
+    const nuevoTienda     = document.getElementById('cp_nuevo_tienda').value;
+    const nuevoPrestashop = document.getElementById('cp_nuevo_prestashop').value;
+    if (!nuevoTienda && !nuevoPrestashop) { alert('Ingrese al menos un nuevo precio.'); return; }
+    // aquí va el fetch al backend cuando esté listo
+    alert('Solicitud enviada.');
+    bootstrap.Modal.getInstance(document.getElementById('cambiarPrecioModal'))?.hide();
+}
+
 
 function abrirModalAgregarProducto() {
     openMassiveSelectionCards();
