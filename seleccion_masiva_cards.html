@@ -518,10 +518,10 @@
     <!-- TOOLBAR -->
     <div class="toolbar">
         <span class="results-count" id="resultsCount">Mostrando <strong id="visibleCount">0</strong> productos</span>
-        <button class="toggle-btn" id="btnSinDistribuir" onclick="toggleFilter('sinDistribuir')">
+        <button class="toggle-btn" id="btnSinDistribuir" onclick="#"">
             Productos Sin distribuir
         </button>
-        <button class="toggle-btn" id="btnStockDisponible" onclick="toggleFilter('stockDisponible')">
+        <button class="toggle-btn" id="btnStockDisponible" onclick="#">
             Stock Disponible
         </button>
     </div>
@@ -805,18 +805,6 @@
             document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
             activeMaterial = mat;
             el.classList.add('active');
-        }
-        currentPage = 1;
-        renderGrid();
-    }
-
-    function toggleFilter(type) {
-        if (type === 'sinDistribuir') {
-            filterSinDistribuir = !filterSinDistribuir;
-            document.getElementById('btnSinDistribuir').classList.toggle('active', filterSinDistribuir);
-        } else {
-            filterStock = !filterStock;
-            document.getElementById('btnStockDisponible').classList.toggle('active', filterStock);
         }
         currentPage = 1;
         renderGrid();
