@@ -439,6 +439,11 @@
 
         .empty-state i { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
         .empty-state p { font-size: 0.85rem; }
+
+        .product-card.clicked {
+            border-color: #111;
+            box-shadow: 0 0 0 2px rgba(0,0,0,0.08);
+        }
     </style>
 </head>
 <body>
@@ -557,12 +562,13 @@
     /* ============================================================
        ESTADO
        ============================================================ */
-    let selectedProducts = {}; // { id: cantidad }
-    let activeMaterial = null;
-    let filterSinDistribuir = false;
-    let filterStock = false;
-    let currentPage = 1;
-    const PER_PAGE = 12;
+        let selectedProducts = {}; // { id: cantidad }
+        let clickedCards = new Set();
+        let activeMaterial = null;
+        let filterSinDistribuir = false;
+        let filterStock = false;
+        let currentPage = 1;
+        const PER_PAGE = 12;
 
     /* ============================================================
        RENDER
@@ -610,6 +616,7 @@
 
     function renderCard(p) {
         const isSelected  = !!selectedProducts[p.id];
+        const isClicked   = clickedCards.has(p.id);
         const isUnavailable = p.stock <= 0 && !isSelected;
         const qty = selectedProducts[p.id] || 1;
 
@@ -619,16 +626,16 @@
 
         // Banner superior
         let topBanner = '';
-        if (isSelected) {
-            topBanner = `<div class="selected-banner"><i class="fas fa-check-circle"></i> ${qty} Unidades</div>`;
-        } else if (!isUnavailable) {
-            topBanner = `<div class="stock-banner"><i class="fas fa-box"></i> Stock: ${p.stock}</div>`;
-        }
+            if (isSelected) {
+                topBanner = `<div class="selected-banner"><i class="fas fa-check-circle"></i> ${qty} Unidades</div>`;
+            } else if (isClicked && !isUnavailable) {
+                topBanner = `<div class="stock-banner"><i class="fas fa-box"></i> Stock: ${p.stock}</div>`;
+            }
 
         // Sección cantidad
         // Sección cantidad
         let quantitySection = '';
-        if (!isUnavailable && !isSelected) {
+        if (!isUnavailable && !isSelected && isClicked) {
         quantitySection = `
                 <div class="card-quantity">
                     <label>Cantidad a Distribuir</label>
@@ -651,7 +658,7 @@
         }
 
         return `
-        <div class="product-card ${isSelected ? 'selected' : ''} ${isUnavailable ? 'unavailable' : ''}"
+        <div class="product-card ${isSelected ? 'selected' : ''} ${isClicked && !isSelected ? 'clicked' : ''} ${isUnavailable ? 'unavailable' : ''}"
              id="card-${p.id}"
              onclick="${isUnavailable ? '' : `toggleCard(${p.id})`}">
 
@@ -727,13 +734,18 @@
     /* ============================================================
        ACCIONES
        ============================================================ */
-    function toggleCard(id) {
-        if (selectedProducts[id]) {
-            removeProduct(id);
-        } else {
-            assignProduct(id);
+        function toggleCard(id) {
+            if (selectedProducts[id]) {
+                removeProduct(id);
+            } else {
+                if (clickedCards.has(id)) {
+                    clickedCards.delete(id);
+                } else {
+                    clickedCards.add(id);
+                }
+                renderGrid();
+            }
         }
-    }
 
     function assignProduct(id) {
         const input = document.getElementById(`qty-${id}`);
@@ -749,10 +761,11 @@
         renderGrid();
     }
 
-    function removeProduct(id) {
-        delete selectedProducts[id];
-        renderGrid();
-    }
+        function removeProduct(id) {
+            delete selectedProducts[id];
+            clickedCards.delete(id);
+            renderGrid();
+        }
 
     function updateQty(id, val) {
         if (selectedProducts[id]) {
