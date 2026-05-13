@@ -1,0 +1,1478 @@
+
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Ventas - DJOYAS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    </head>
+<body>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="sidebar-brand">
+            <!--i class="fas fa-gem"></i-->
+            <span class="brand-text">DJOYAS</span>
+        </div>
+        <button class="sidebar-toggle" id="sidebarToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+    
+    <div class="sidebar-menu">
+        <ul class="nav flex-column">
+            <!-- Dashboard -->
+                        
+            <!-- Dashboard Sucursal -->
+                        
+            <!-- Dashboard Bodega -->
+                        <li class="nav-item">
+                <a class="nav-link " href="https://dixclientes.cl/djoyas/?page=dashboard_bodega">
+                    <i class="fas fa-warehouse"></i>
+                    <span class="nav-text">Dashboard Bodega</span>
+                </a>
+            </li>
+                        
+            <!-- Nueva Venta - Acceso Directo -->
+                        
+            <!-- Pago Crédito - Acceso Directo -->
+                        
+            <!-- Ventas -->
+                        
+            <!-- Clientes -->
+                        
+
+
+            <!-- Reportes -->
+                        
+            <!-- Business Intelligence -->
+                        
+            <!-- Gestión -->
+                        
+            <!-- Bodega -->
+                        <li class="nav-item">
+                <a class="nav-link active" 
+                   href="#bodegaSubmenu" data-bs-toggle="collapse" role="button"
+                   aria-expanded="true">
+                    <i class="fas fa-boxes"></i>
+                    <span class="nav-text">Bodega</span>
+                    <i class="fas fa-chevron-down ms-auto"></i>
+                </a>
+                <div class="collapse show" id="bodegaSubmenu">
+                    <ul class="nav flex-column ms-3">
+                        
+                                                <li class="nav-item">
+                            <a class="nav-link active" 
+                               href="?page=productos">
+                                <i class="fas fa-boxes"></i>
+                                <span class="nav-text">Productos</span>
+                            </a>
+                        </li>
+                                                
+                                                <li class="nav-item">
+                            <a class="nav-link " 
+                               href="?page=producto_buscar">
+                                <i class="fas fa-search-location"></i>
+                                <span class="nav-text">Buscar en Bodega</span>
+                            </a>
+                        </li>
+                                                
+                                                
+                                                
+                                                <li class="nav-item">
+                            <a class="nav-link " 
+                               href="?page=distribucion_proceso_bodega">
+                                <i class="fas fa-clock"></i>
+                                <span class="nav-text">Pendiente Distribución</span>
+                            </a>
+                        </li>
+                                                
+                                                
+                                                
+                                                
+                                                <li class="nav-item">
+                            <a class="nav-link " 
+                               href="?page=distribucion_prestashop">
+                                <i class="fas fa-store"></i>
+                                <span class="nav-text">Distribución Prestashop</span>
+                            </a>
+                        </li>
+                                                
+                                                
+                                                <li class="nav-item">
+                            <a class="nav-link " 
+                               href="?page=producto_cambio_precio_revisar">
+                                <i class="fas fa-dollar-sign"></i>
+                                <span class="nav-text">Solicitud Cambios de Precios</span>
+                            </a>
+                        </li>
+                                                
+                                                
+                        <!-- Submenú Maestros -->
+                                                <li class="nav-item">
+                            <a class="nav-link " 
+                               href="#maestrosSubmenu" data-bs-toggle="collapse" role="button"
+                               aria-expanded="false">
+                                <i class="fas fa-cogs"></i>
+                                <span class="nav-text">Maestros</span>
+                                <i class="fas fa-chevron-down ms-auto"></i>
+                            </a>
+                            <div class="collapse " id="maestrosSubmenu">
+                                <ul class="nav flex-column ms-4">
+                                                                        <li class="nav-item">
+                                        <a class="nav-link " 
+                                           href="?page=producto_caja">
+                                            <i class="fas fa-box"></i>
+                                            <span class="nav-text">Cajas Bodegaje</span>
+                                        </a>
+                                    </li>
+                                                                        
+                                                                        <li class="nav-item">
+                                        <a class="nav-link " 
+                                           href="?page=producto_material">
+                                            <i class="fas fa-cube"></i>
+                                            <span class="nav-text">Materiales</span>
+                                        </a>
+                                    </li>
+                                                                        
+                                                                        <li class="nav-item">
+                                        <a class="nav-link " 
+                                           href="?page=producto_tipo">
+                                            <i class="fas fa-tags"></i>
+                                            <span class="nav-text">Tipos</span>
+                                        </a>
+                                    </li>
+                                                                        
+                                                                        <li class="nav-item">
+                                        <a class="nav-link " 
+                                           href="?page=producto_subtipo">
+                                            <i class="fas fa-tag"></i>
+                                            <span class="nav-text">Subtipos</span>
+                                        </a>
+                                    </li>
+                                                                        
+                                                                        
+                                                                        <li class="nav-item">
+                                        <a class="nav-link " 
+                                           href="?page=producto_coleccion">
+                                            <i class="fas fa-layer-group"></i>
+                                            <span class="nav-text">Colecciones</span>
+                                        </a>
+                                    </li>
+                                                                        
+                                                                        <li class="nav-item">
+                                        <a class="nav-link " 
+                                           href="?page=producto_estilo">
+                                            <i class="fas fa-palette"></i>
+                                            <span class="nav-text">Estilos</span>
+                                        </a>
+                                    </li>
+                                                                    </ul>
+                            </div>
+                        </li>
+                                            </ul>
+                </div>
+            </li>
+                        
+            <!-- Usuarios -->
+                        
+            <!-- Config POS -->
+                        
+            <!-- Tickets (AL FINAL) -->
+            
+        </ul>
+    </div>
+    
+    <div class="sidebar-footer">
+        <div class="user-info">
+            <i class="fas fa-user-circle"></i>
+            <span class="user-name">bod.ini</span>
+        </div>
+    </div>
+</div>         
+        <!-- Main Content -->
+        <div class="main-content flex-grow-1">
+            <!-- Header -->
+            
+<header class="main-header">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="header-left d-flex align-items-center">
+            <!-- Botón de menú móvil -->
+            <button class="mobile-menu-toggle me-3" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h4 class="mb-0">
+                Dashboard            </h4>
+        </div>
+        
+        <div class="header-right">
+            <div class="d-flex align-items-center">
+                <!-- Notifications -->
+                <div class="dropdown me-3">
+                    <button class="btn btn-outline-secondary position-relative" type="button" 
+                            id="notificationsDropdown" data-bs-toggle="dropdown">
+                        <i class="fas fa-bell"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            3
+                        </span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" style="width: 300px;">
+                        <li><h6 class="dropdown-header">Notificaciones</h6></li>
+                        <li><a class="dropdown-item" href="#">
+                            <i class="fas fa-info-circle text-info me-2"></i>
+                            Nueva venta registrada
+                        </a></li>
+                        <li><a class="dropdown-item" href="#">
+                            <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+                            Stock bajo en productos
+                        </a></li>
+                        <li><a class="dropdown-item" href="#">
+                            <i class="fas fa-user-plus text-success me-2"></i>
+                            Nuevo cliente registrado
+                        </a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-center" href="#">Ver todas</a></li>
+                    </ul>
+                </div>
+                
+                <!-- User Menu -->
+                <div class="dropdown">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" 
+                            id="userDropdown" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-circle me-2"></i>
+                        bod.ini                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><h6 class="dropdown-header">
+                            Bodega Registro                        </h6></li>
+                        <li><a class="dropdown-item" href="?page=perfil">
+                            <i class="fas fa-user me-2"></i>Mi Perfil
+                        </a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="logout.php">
+                            <i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>             
+            <!-- Content Area -->
+            <div class="content-area p-4">
+                 
+<div class="container-fluid">
+    <!-- Header elegante -->
+    <div class="card border-0 shadow-sm mb-4" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+        <div class="card-body py-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-1 text-dark">
+                        <i class="fas fa-boxes me-3 text-primary"></i>Gestión de Productos
+                    </h2>
+                    <small class="text-muted">
+                        <i class="fas fa-info-circle me-1"></i>
+                        Administración completa de productos y su inventario
+                    </small>
+                </div>
+                <div>
+                    <div class="btn-group">
+                        <a href="?page=productos_editar" class="btn btn-primary">
+                            <i class="fas fa-plus me-2"></i>Nuevo Producto
+                        </a>
+                        <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="?page=dashboard_bodega"><i class="fas fa-chart-bar me-2"></i>Dashboard</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="exportData()"><i class="fas fa-download me-2"></i>Exportar</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Tabla de productos -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-header border-0 py-3" style="background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 text-dark">
+                    <i class="fas fa-table me-2 text-success"></i>Registro de Productos
+                </h5>
+                <span class="text-muted small">
+                    Mostrando 100 de 4635 registros
+                </span>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <!-- Search Bar -->
+            <div class="p-3 border-bottom" style="background-color: #f8f9fa;">
+                <form method="GET" class="row g-3">
+                    <input type="hidden" name="page" value="productos">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="fas fa-search text-muted"></i>
+                            </span>
+                            <input type="text" class="form-control border-start-0" name="search" 
+                                   value=""
+                                   placeholder="Buscar por ID, nombre, código o descripción...">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <select name="tipo" class="form-select">
+                            <option value="">Todos los tipos</option>
+                                                            <option value="48" 
+                                        >
+                                    Anillos de Bisutería                                </option>
+                                                            <option value="19" 
+                                        >
+                                    Anillos de Plata                                </option>
+                                                            <option value="33" 
+                                        >
+                                    Anillos Enchapado                                </option>
+                                                            <option value="47" 
+                                        >
+                                    Aros de Bisuteria                                </option>
+                                                            <option value="20" 
+                                        >
+                                    Aros de Plata                                </option>
+                                                            <option value="32" 
+                                        >
+                                    Aros Enchapado                                </option>
+                                                            <option value="43" 
+                                        >
+                                    Bolsas                                </option>
+                                                            <option value="50" 
+                                        >
+                                    Cadenas de Bisutería                                </option>
+                                                            <option value="24" 
+                                        >
+                                    Cadenas de Plata                                </option>
+                                                            <option value="35" 
+                                        >
+                                    Cadenas Enchapado                                </option>
+                                                            <option value="44" 
+                                        >
+                                    Cajas                                </option>
+                                                            <option value="51" 
+                                        >
+                                    Colgantes de Bisutería                                </option>
+                                                            <option value="23" 
+                                        >
+                                    Colgantes de Plata                                </option>
+                                                            <option value="36" 
+                                        >
+                                    Colgantes Enchapado                                </option>
+                                                            <option value="53" 
+                                        >
+                                    Collares de Bisutería                                </option>
+                                                            <option value="26" 
+                                        >
+                                    Collares de Plata                                </option>
+                                                            <option value="38" 
+                                        >
+                                    Collares Enchapado                                </option>
+                                                            <option value="54" 
+                                        >
+                                    Conjuntos de Bisutería                                </option>
+                                                            <option value="22" 
+                                        >
+                                    Conjuntos de Plata                                </option>
+                                                            <option value="39" 
+                                        >
+                                    Conjuntos Enchapado                                </option>
+                                                            <option value="29" 
+                                        >
+                                    Hombre                                </option>
+                                                            <option value="37" 
+                                        >
+                                    Infantil Enchapado                                </option>
+                                                            <option value="25" 
+                                        >
+                                    Infantil Plata                                </option>
+                                                            <option value="31" 
+                                        >
+                                    Insumos de Plata                                </option>
+                                                            <option value="41" 
+                                        >
+                                    Insumos Enchapados                                </option>
+                                                            <option value="55" 
+                                        >
+                                    Insumos para Bisutería                                </option>
+                                                            <option value="52" 
+                                        >
+                                    Joyas Infantiles de Bisutería                                </option>
+                                                            <option value="45" 
+                                        >
+                                    Joyeros                                </option>
+                                                            <option value="46" 
+                                        >
+                                    Limpiadores                                </option>
+                                                            <option value="30" 
+                                        >
+                                    Pack de Joyas                                </option>
+                                                            <option value="49" 
+                                        >
+                                    Pulseras de Bisutería                                </option>
+                                                            <option value="21" 
+                                        >
+                                    Pulseras de Plata                                </option>
+                                                            <option value="34" 
+                                        >
+                                    Pulseras Enchapado                                </option>
+                                                            <option value="42" 
+                                        >
+                                    Sin valor                                </option>
+                                                            <option value="28" 
+                                        >
+                                    Swarovski Elements                                </option>
+                                                            <option value="56" 
+                                        >
+                                    Tobilleras de Bisutería                                </option>
+                                                            <option value="27" 
+                                        >
+                                    Tobilleras de Plata                                </option>
+                                                            <option value="40" 
+                                        >
+                                    Tobilleras Enchapado                                </option>
+                                                    </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select name="material" class="form-select">
+                            <option value="">Todos los materiales</option>
+                                                            <option value="13" 
+                                        >
+                                    Accesorios                                </option>
+                                                            <option value="15" 
+                                        >
+                                    Bisutería                                </option>
+                                                            <option value="12" 
+                                        >
+                                    Enchape                                </option>
+                                                            <option value="14" 
+                                        >
+                                    Insumos                                </option>
+                                                            <option value="11" 
+                                        >
+                                    Plata                                </option>
+                                                    </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select name="status" class="form-select">
+                            <option value="">Todos los estados</option>
+                            <option value="1" >Activos</option>
+                            <option value="0" >Inactivos</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="btn-group w-100">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-search me-2"></i>Buscar
+                            </button>
+                            <a href="?page=productos" class="btn btn-outline-secondary">
+                                <i class="fas fa-times me-1"></i>Limpiar
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+
+                            <div class="table-responsive">
+                    <table class="table table-hover table-light mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th class="border-0 text-muted small fw-semibold sortable-header" style="cursor: pointer;">
+                <a href="?page=productos&amp;sort=id_producto&amp;dir=asc&amp;tipo=&amp;material=&amp;status=" 
+                   class="text-muted text-decoration-none d-flex align-items-center">
+                    <span>ID</span>
+                    <i class="fas fa-sort ms-2 opacity-50"></i>
+                </a>
+            </th>                                <th class="border-0 text-muted small fw-semibold sortable-header" style="cursor: pointer;">
+                <a href="?page=productos&amp;sort=nombre&amp;dir=asc&amp;tipo=&amp;material=&amp;status=" 
+                   class="text-muted text-decoration-none d-flex align-items-center">
+                    <span>Producto</span>
+                    <i class="fas fa-sort ms-2 opacity-50"></i>
+                </a>
+            </th>                                <th class="border-0 text-muted small fw-semibold sortable-header" style="cursor: pointer;">
+                <a href="?page=productos&amp;sort=tipo&amp;dir=asc&amp;tipo=&amp;material=&amp;status=" 
+                   class="text-muted text-decoration-none d-flex align-items-center">
+                    <span>Tipo</span>
+                    <i class="fas fa-sort ms-2 opacity-50"></i>
+                </a>
+            </th>                                <th class="border-0 text-muted small fw-semibold sortable-header" style="cursor: pointer;">
+                <a href="?page=productos&amp;sort=material&amp;dir=asc&amp;tipo=&amp;material=&amp;status=" 
+                   class="text-muted text-decoration-none d-flex align-items-center">
+                    <span>Material</span>
+                    <i class="fas fa-sort ms-2 opacity-50"></i>
+                </a>
+            </th>                                <th class="border-0 text-muted small fw-semibold sortable-header" style="cursor: pointer;">
+                <a href="?page=productos&amp;sort=cantidad_disponible&amp;dir=asc&amp;tipo=&amp;material=&amp;status=" 
+                   class="text-muted text-decoration-none d-flex align-items-center">
+                    <span>Stock</span>
+                    <i class="fas fa-sort ms-2 opacity-50"></i>
+                </a>
+            </th>                                <th class="border-0 text-muted small fw-semibold sortable-header" style="cursor: pointer;">
+                <a href="?page=productos&amp;sort=precio_venta&amp;dir=asc&amp;tipo=&amp;material=&amp;status=" 
+                   class="text-muted text-decoration-none d-flex align-items-center">
+                    <span>Precio Tienda</span>
+                    <i class="fas fa-sort ms-2 opacity-50"></i>
+                </a>
+            </th>                                <th class="border-0 text-muted small fw-semibold text-center" style="width: 200px;">Progress Tracker</th>
+                                <th class="border-0 text-muted small fw-semibold sortable-header" style="cursor: pointer;">
+                <a href="?page=productos&amp;sort=estado&amp;dir=asc&amp;tipo=&amp;material=&amp;status=" 
+                   class="text-muted text-decoration-none d-flex align-items-center">
+                    <span>Estado</span>
+                    <i class="fas fa-sort ms-2 opacity-50"></i>
+                </a>
+            </th>                                <th class="border-0 text-muted small fw-semibold">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                                        <tr class="table-light">
+                                <td class="align-middle">
+                                    <span class="badge bg-primary">#102993</span>                                </td>
+                                <td class="align-middle">
+                                    <div>Aros de Plata 925 Hoja Calada con Circones</div>
+    <small class="text-muted">PARCP102993000</small>                                                                    </td>
+                                <td class="align-middle">
+                                    <span class="badge bg-info">Aros de Plata</span>
+                                                                            <div><small class="text-muted">Aro Circón Pegados</small></div>
+                                                                    </td>
+                                <td class="align-middle">
+                                    <span class="badge bg-secondary small">Plata</span>
+                                </td>
+                                <td class="align-middle">
+                                    <span class="badge bg-success fw-bold">
+                                        120                                    </span>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="fw-semibold text-success">$17.400</div>                                </td>
+                                <td class="align-middle text-center">
+                                    <div class="progress-tracker d-flex align-items-center justify-content-between" style="gap: 8px;"><div class="progress-step position-relative" 
+                      title="Bodega: Completado"
+                      data-bs-toggle="tooltip">
+                    <div class="step-circle d-flex align-items-center justify-content-center" 
+                         style="width: 24px; height: 24px; border-radius: 50%; 
+                                background-color: #198754; color: white; font-size: 10px;">
+                        <i class="fas fa-warehouse"></i>
+                    </div><div class="step-connector" 
+                          style="width: 16px; height: 2px; background-color: #e9ecef; margin: 0 2px;"></div></div><div class="progress-step position-relative" 
+                      title="Etiquetado: Completado"
+                      data-bs-toggle="tooltip">
+                    <div class="step-circle d-flex align-items-center justify-content-center" 
+                         style="width: 24px; height: 24px; border-radius: 50%; 
+                                background-color: #198754; color: white; font-size: 10px;">
+                        <i class="fas fa-tag"></i>
+                    </div><div class="step-connector" 
+                          style="width: 16px; height: 2px; background-color: #e9ecef; margin: 0 2px;"></div></div><div class="progress-step position-relative" 
+                      title="Atributo: Completado"
+                      data-bs-toggle="tooltip">
+                    <div class="step-circle d-flex align-items-center justify-content-center" 
+                         style="width: 24px; height: 24px; border-radius: 50%; 
+                                background-color: #198754; color: white; font-size: 10px;">
+                        <i class="fas fa-list-alt"></i>
+                    </div><div class="step-connector" 
+                          style="width: 16px; height: 2px; background-color: #e9ecef; margin: 0 2px;"></div></div><div class="progress-step position-relative" 
+                      title="Detalle: Pendiente"
+                      data-bs-toggle="tooltip">
+                    <div class="step-circle d-flex align-items-center justify-content-center" 
+                         style="width: 24px; height: 24px; border-radius: 50%; 
+                                background-color: #dc3545; color: white; font-size: 10px;">
+                        <i class="fas fa-info-circle"></i>
+                    </div><div class="step-connector" 
+                          style="width: 16px; height: 2px; background-color: #e9ecef; margin: 0 2px;"></div></div><div class="progress-step position-relative" 
+                      title="Foto: Pendiente"
+                      data-bs-toggle="tooltip">
+                    <div class="step-circle d-flex align-items-center justify-content-center" 
+                         style="width: 24px; height: 24px; border-radius: 50%; 
+                                background-color: #dc3545; color: white; font-size: 10px;">
+                        <i class="fas fa-camera"></i>
+                    </div><div class="step-connector" 
+                          style="width: 16px; height: 2px; background-color: #e9ecef; margin: 0 2px;"></div></div><div class="progress-step position-relative" 
+                      title="PrestaShop: Pendiente"
+                      data-bs-toggle="tooltip">
+                    <div class="step-circle d-flex align-items-center justify-content-center" 
+                         style="width: 24px; height: 24px; border-radius: 50%; 
+                                background-color: #dc3545; color: white; font-size: 10px;">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div></div></div>                                </td>
+                                <td class="align-middle">
+                                    <span class="badge fw-bold" style="background-color: #fed7aa; color: #9a3412;">En proceso de registro</span>                                </td>
+                                <td class="align-middle">
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a href="?page=productos_ficha&id=102993&return=page%3Dproductos%26search%3D%26tipo%3D%26material%3D%26status%3D%26p%3D1%26sort%3D%26dir%3DASC" 
+                                           class="btn btn-outline-info" title="Ver Ficha del Producto">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="?page=productos_editar&id=102993&return=page%3Dproductos%26search%3D%26tipo%3D%26material%3D%26status%3D%26p%3D1%26sort%3D%26dir%3DASC" 
+                                           class="btn btn-outline-primary" title="Editar Producto">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                                                                <button type="button" class="btn btn-outline-secondary btn-duplicar" 
+                                                data-producto-id="102993"
+                                                data-producto-nombre="Aros de Plata 925 Hoja Calada con Circones"
+                                                title="Duplicar Producto">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                                                                                                        <button type="button" class="btn btn-outline-info btn-cambio-precio" 
+                                                data-producto-id="102993"
+                                                data-producto-nombre="Aros de Plata 925 Hoja Calada con Circones"
+                                                title="Solicitar Cambio de Precio">
+                                            <i class="fas fa-dollar-sign"></i>
+                                        </button>
+                                                                                                                        <button type="button" class="btn btn-outline-success" 
+                                                onclick="actualizarWorkflowProducto(102993)" 
+                                                title="Actualizar Workflow">
+                                            <i class="fas fa-sync-alt"></i>
+                                        </button>
+                                                                                <button type="button" class="btn btn-outline-warning" 
+                                                onclick="toggleStatus(102993)" 
+                                                title="Cambiar Estado">
+                                            <i class="fas fa-toggle-off"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                                                        <tr class="">
+                                <td class="align-middle">
+                                    <span class="badge bg-primary">#102992</span>                                </td>
+                                <td class="align-middle">
+                                    <div>Aros de Plata 925 Gato de Circones y Ojos Negros</div>
+    <small class="text-muted">PARCP102992000</small>                                                                    </td>
+                                <td class="align-middle">
+                                    <span class="badge bg-info">Aros de Plata</span>
+                                                                            <div><small class="text-muted">Aro Circón Pegados</small></div>
+                                                                    </td>
+                                <td class="align-middle">
+                                    <span class="badge bg-secondary small">Plata</span>
+                                </td>
+                                <td class="align-middle">
+                                    <span class="badge bg-success fw-bold">
+                                        100                                    </span>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="fw-semibold text-success">$15.200</div>                                </td>
+                                <td class="align-middle text-center">
+                                    <div class="progress-tracker d-flex align-items-center justify-content-between" style="gap: 8px;"><div class="progress-step position-relative" 
+                      title="Bodega: Completado"
+                      data-bs-toggle="tooltip">
+                    <div class="step-circle d-flex align-items-center justify-content-center" 
+                         style="width: 24px; height: 24px; border-radius: 50%; 
+                                background-color: #198754; color: white; font-size: 10px;">
+                        <i class="fas fa-warehouse"></i>
+                    </div><div class="step-connector" 
+                          style="width: 16px; height: 2px; background-color: #e9ecef; margin: 0 2px;"></div></div><div class="progress-step position-relative" 
+                      title="Etiquetado: Completado"
+                      data-bs-toggle="tooltip">
+                    <div class="step-circle d-flex align-items-center justify-content-center" 
+                         style="width: 24px; height: 24px; border-radius: 50%; 
+                                background-color: #198754; color: white; font-size: 10px;">
+                        <i class="fas fa-tag"></i>
+                    </div><div class="step-connector" 
+                          style="width: 16px; height: 2px; background-color: #e9ecef; margin: 0 2px;"></div></div><div class="progress-step position-relative" 
+                      title="Atributo: Completado"
+                      data-bs-toggle="tooltip">
+                    <div class="step-circle d-flex align-items-center justify-content-center" 
+                         style="width: 24px; height: 24px; border-radius: 50%; 
+                                background-color: #198754; color: white; font-size: 10px;">
+                        <i class="fas fa-list-alt"></i>
+                    </div><div class="step-connector" 
+                          style="width: 16px; height: 2px; background-color: #e9ecef; margin: 0 2px;"></div></div><div class="progress-step position-relative" 
+                      title="Detalle: Pendiente"
+                      data-bs-toggle="tooltip">
+                    <div class="step-circle d-flex align-items-center justify-content-center" 
+                         style="width: 24px; height: 24px; border-radius: 50%; 
+                                background-color: #dc3545; color: white; font-size: 10px;">
+                        <i class="fas fa-info-circle"></i>
+                    </div><div class="step-connector" 
+                          style="width: 16px; height: 2px; background-color: #e9ecef; margin: 0 2px;"></div></div><div class="progress-step position-relative" 
+                      title="Foto: Pendiente"
+                      data-bs-toggle="tooltip">
+                    <div class="step-circle d-flex align-items-center justify-content-center" 
+                         style="width: 24px; height: 24px; border-radius: 50%; 
+                                background-color: #dc3545; color: white; font-size: 10px;">
+                        <i class="fas fa-camera"></i>
+                    </div><div class="step-connector" 
+                          style="width: 16px; height: 2px; background-color: #e9ecef; margin: 0 2px;"></div></div><div class="progress-step position-relative" 
+                      title="PrestaShop: Pendiente"
+                      data-bs-toggle="tooltip">
+                    <div class="step-circle d-flex align-items-center justify-content-center" 
+                         style="width: 24px; height: 24px; border-radius: 50%; 
+                                background-color: #dc3545; color: white; font-size: 10px;">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div></div></div>                                </td>
+                                <td class="align-middle">
+                                    <span class="badge fw-bold" style="background-color: #fed7aa; color: #9a3412;">En proceso de registro</span>                                </td>
+                                <td class="align-middle">
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a href="?page=productos_ficha&id=102992&return=page%3Dproductos%26search%3D%26tipo%3D%26material%3D%26status%3D%26p%3D1%26sort%3D%26dir%3DASC" 
+                                           class="btn btn-outline-info" title="Ver Ficha del Producto">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="?page=productos_editar&id=102992&return=page%3Dproductos%26search%3D%26tipo%3D%26material%3D%26status%3D%26p%3D1%26sort%3D%26dir%3DASC" 
+                                           class="btn btn-outline-primary" title="Editar Producto">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                                                                <button type="button" class="btn btn-outline-secondary btn-duplicar" 
+                                                data-producto-id="102992"
+                                                data-producto-nombre="Aros de Plata 925 Gato de Circones y Ojos Negros"
+                                                title="Duplicar Producto">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                                                                                                        <button type="button" class="btn btn-outline-info btn-cambio-precio" 
+                                                data-producto-id="102992"
+                                                data-producto-nombre="Aros de Plata 925 Gato de Circones y Ojos Negros"
+                                                title="Solicitar Cambio de Precio">
+                                            <i class="fas fa-dollar-sign"></i>
+                                        </button>
+                                                                                                                        <button type="button" class="btn btn-outline-success" 
+                                                onclick="actualizarWorkflowProducto(102992)" 
+                                                title="Actualizar Workflow">
+                                            <i class="fas fa-sync-alt"></i>
+                                        </button>
+                                                                                <button type="button" class="btn btn-outline-warning" 
+                                                onclick="toggleStatus(102992)" 
+                                                title="Cambiar Estado">
+                                            <i class="fas fa-toggle-off"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+              
+                                                        <tr class="">
+                                <td class="align-middle">
+                                    <span class="badge bg-primary">#102894</span>                                </td>
+                                <td class="align-middle">
+                                    <div>Cadena de Plata 925 Modelo Forzatina 120 60 cm</div>
+    <small class="text-muted">PCDCF102894000</small>                                                                    </td>
+                                <td class="align-middle">
+                                    <span class="badge bg-info">Cadenas de Plata</span>
+                                                                            <div><small class="text-muted">Cadena Forzatina</small></div>
+                                                                    </td>
+                                <td class="align-middle">
+                                    <span class="badge bg-secondary small">Plata</span>
+                                </td>
+                                <td class="align-middle">
+                                    <span class="badge bg-success fw-bold">
+                                        31                                    </span>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="fw-semibold text-success">$165.400</div>                                </td>
+                                <td class="align-middle text-center">
+                                    <div class="progress-tracker d-flex align-items-center justify-content-between" style="gap: 8px;"><div class="progress-step position-relative" 
+                      title="Bodega: Completado"
+                      data-bs-toggle="tooltip">
+                    <div class="step-circle d-flex align-items-center justify-content-center" 
+                         style="width: 24px; height: 24px; border-radius: 50%; 
+                                background-color: #198754; color: white; font-size: 10px;">
+                        <i class="fas fa-warehouse"></i>
+                    </div><div class="step-connector" 
+                          style="width: 16px; height: 2px; background-color: #e9ecef; margin: 0 2px;"></div></div><div class="progress-step position-relative" 
+                      title="Etiquetado: Completado"
+                      data-bs-toggle="tooltip">
+                    <div class="step-circle d-flex align-items-center justify-content-center" 
+                         style="width: 24px; height: 24px; border-radius: 50%; 
+                                background-color: #198754; color: white; font-size: 10px;">
+                        <i class="fas fa-tag"></i>
+                    </div><div class="step-connector" 
+                          style="width: 16px; height: 2px; background-color: #e9ecef; margin: 0 2px;"></div></div><div class="progress-step position-relative" 
+                      title="Atributo: Completado"
+                      data-bs-toggle="tooltip">
+                    <div class="step-circle d-flex align-items-center justify-content-center" 
+                         style="width: 24px; height: 24px; border-radius: 50%; 
+                                background-color: #198754; color: white; font-size: 10px;">
+                        <i class="fas fa-list-alt"></i>
+                    </div><div class="step-connector" 
+                          style="width: 16px; height: 2px; background-color: #e9ecef; margin: 0 2px;"></div></div><div class="progress-step position-relative" 
+                      title="Detalle: En Proceso"
+                      data-bs-toggle="tooltip">
+                    <div class="step-circle d-flex align-items-center justify-content-center" 
+                         style="width: 24px; height: 24px; border-radius: 50%; 
+                                background-color: #ffc107; color: white; font-size: 10px;">
+                        <i class="fas fa-info-circle"></i>
+                    </div><div class="step-connector" 
+                          style="width: 16px; height: 2px; background-color: #e9ecef; margin: 0 2px;"></div></div><div class="progress-step position-relative" 
+                      title="Foto: Completado"
+                      data-bs-toggle="tooltip">
+                    <div class="step-circle d-flex align-items-center justify-content-center" 
+                         style="width: 24px; height: 24px; border-radius: 50%; 
+                                background-color: #198754; color: white; font-size: 10px;">
+                        <i class="fas fa-camera"></i>
+                    </div><div class="step-connector" 
+                          style="width: 16px; height: 2px; background-color: #e9ecef; margin: 0 2px;"></div></div><div class="progress-step position-relative" 
+                      title="PrestaShop: En Proceso"
+                      data-bs-toggle="tooltip">
+                    <div class="step-circle d-flex align-items-center justify-content-center" 
+                         style="width: 24px; height: 24px; border-radius: 50%; 
+                                background-color: #ffc107; color: white; font-size: 10px;">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div></div></div>                                </td>
+                                <td class="align-middle">
+                                    <span class="badge fw-bold" style="background-color: #fed7aa; color: #9a3412;">En proceso de registro</span>                                </td>
+                                <td class="align-middle">
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a href="?page=productos_ficha&id=102894&return=page%3Dproductos%26search%3D%26tipo%3D%26material%3D%26status%3D%26p%3D1%26sort%3D%26dir%3DASC" 
+                                           class="btn btn-outline-info" title="Ver Ficha del Producto">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="?page=productos_editar&id=102894&return=page%3Dproductos%26search%3D%26tipo%3D%26material%3D%26status%3D%26p%3D1%26sort%3D%26dir%3DASC" 
+                                           class="btn btn-outline-primary" title="Editar Producto">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                                                                <button type="button" class="btn btn-outline-secondary btn-duplicar" 
+                                                data-producto-id="102894"
+                                                data-producto-nombre="Cadena de Plata 925 Modelo Forzatina 120 60 cm"
+                                                title="Duplicar Producto">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                                                                                                        <button type="button" class="btn btn-outline-info btn-cambio-precio" 
+                                                data-producto-id="102894"
+                                                data-producto-nombre="Cadena de Plata 925 Modelo Forzatina 120 60 cm"
+                                                title="Solicitar Cambio de Precio">
+                                            <i class="fas fa-dollar-sign"></i>
+                                        </button>
+                                                                                                                        <button type="button" class="btn btn-outline-success" 
+                                                onclick="actualizarWorkflowProducto(102894)" 
+                                                title="Actualizar Workflow">
+                                            <i class="fas fa-sync-alt"></i>
+                                        </button>
+                                                                                <button type="button" class="btn btn-outline-warning" 
+                                                onclick="toggleStatus(102894)" 
+                                                title="Cambiar Estado">
+                                            <i class="fas fa-toggle-off"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                                                    </tbody>
+                    </table>
+                </div>
+
+                <!-- Footer con estadísticas y paginación -->
+                <div class="card-footer border-0 bg-light">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <small class="text-muted">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Página 1 de 47 
+                                (4635 productos totales)
+                            </small>
+                        </div>
+                        <div class="col-md-6">
+                                <nav aria-label="Navegación de páginas">
+        <ul class="pagination pagination-sm justify-content-end mb-0">
+            
+                        <li class="page-item active">
+                <a class="page-link" href="?page=productos&p=1&tipo=&material=&status=">
+                    1                </a>
+            </li>
+                        <li class="page-item ">
+                <a class="page-link" href="?page=productos&p=2&tipo=&material=&status=">
+                    2                </a>
+            </li>
+                        <li class="page-item ">
+                <a class="page-link" href="?page=productos&p=3&tipo=&material=&status=">
+                    3                </a>
+            </li>
+            
+                        <li class="page-item">
+                <a class="page-link" href="?page=productos&p=2&tipo=&material=&status=">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </li>
+                    </ul>
+    </nav>
+                            </div>
+                    </div>
+                </div>
+                    </div>
+    </div>
+</div>
+
+<!-- Formulario oculto para acciones -->
+<form id="toggleForm" method="POST" style="display: none;">
+    <input type="hidden" name="action" value="toggle_status">
+    <input type="hidden" name="id" id="toggleId">
+</form>
+
+<!-- Modal Cambio de Precio -->
+<div class="modal fade" id="modalCambioPrecio" tabindex="-1" aria-labelledby="modalCambioPrecioLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%); color: white;">
+                <h5 class="modal-title" id="modalCambioPrecioLabel">
+                    <i class="fas fa-dollar-sign me-2"></i>Solicitud de Cambio de Precio
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <div id="cambioPrecioLoading" class="text-center py-4">
+                    <div class="spinner-border text-primary" role="status"></div>
+                    <p class="mt-2 text-muted">Cargando información del producto...</p>
+                </div>
+                <div id="cambioPrecioError" class="alert alert-danger d-none"></div>
+                <div id="cambioPrecioPendiente" class="alert alert-warning d-none">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Este producto ya tiene una solicitud de cambio de precio pendiente de aprobación.
+                </div>
+                <form id="formCambioPrecio" class="d-none">
+                    <input type="hidden" id="cp_id_producto">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Producto</label>
+                            <input type="text" id="cp_nombre_producto" class="form-control bg-light" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Código</label>
+                            <input type="text" id="cp_codigo_producto" class="form-control bg-light" readonly>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Precio Tienda Actual</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="text" id="cp_precio_antiguo_tienda" class="form-control bg-light" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Precio Prestashop Actual</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="text" id="cp_precio_antiguo_prestashop" class="form-control bg-light" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-primary">Nuevo Precio Prestashop <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" id="cp_precio_nuevo_prestashop" class="form-control" required min="1" placeholder="Ingrese precio Prestashop">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold text-primary">Nuevo Precio Tienda <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" id="cp_precio_nuevo_tienda" class="form-control bg-light" readonly>
+                            </div>
+                            <small class="text-muted">Se calcula automáticamente (doble del precio Prestashop)</small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Comentario / Razón del cambio <span class="text-danger">*</span></label>
+                        <textarea id="cp_comentario_registro" class="form-control" rows="3" required placeholder="Explique el motivo del cambio de precio..."></textarea>
+                    </div>
+                    <div class="alert alert-info small mb-0">
+                        <i class="fas fa-info-circle me-1"></i>
+                        El precio tienda es siempre el doble del precio Prestashop. Una vez registrada, la solicitud debe ser autorizada por el encargado de revisión.
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i>Cancelar
+                </button>
+                <button type="button" class="btn btn-primary" id="btnGuardarCambioPrecio" disabled>
+                    <i class="fas fa-save me-2"></i>Registrar Solicitud
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Estilos para Progress Tracker moderno y elegante */
+.progress-tracker {
+    padding: 4px 8px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #f1f3f4 0%, #e8eaed 100%);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #dadce0;
+}
+
+.progress-tracker:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.progress-step {
+    display: flex;
+    align-items: center;
+}
+
+.step-circle {
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.step-circle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.step-connector {
+    flex-shrink: 0;
+    background: linear-gradient(90deg, #dee2e6 0%, #adb5bd 50%, #dee2e6 100%);
+    border-radius: 1px;
+    transition: all 0.3s ease;
+}
+
+.progress-tracker:hover .step-connector {
+    background: linear-gradient(90deg, #adb5bd 0%, #6c757d 50%, #adb5bd 100%);
+}
+
+/* Animación sutil para los iconos */
+.step-circle i {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Tooltip personalizado */
+.progress-step[data-bs-toggle="tooltip"] {
+    cursor: help;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .progress-tracker {
+        gap: 4px !important;
+    }
+    
+    .step-circle {
+        width: 20px !important;
+        height: 20px !important;
+        font-size: 8px !important;
+    }
+    
+    .step-connector {
+        width: 12px !important;
+    }
+}
+</style>
+
+<script>
+// Búsqueda solo con Enter
+const searchInput = document.querySelector('input[name="search"]');
+
+if (searchInput) {
+    // Atajo Ctrl+F para enfocar la búsqueda
+    document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.key === 'f') {
+            e.preventDefault();
+            searchInput.focus();
+        }
+    });
+
+    // Búsqueda solo con Enter
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            // Buscar el formulario padre y enviarlo
+            const form = this.closest('form');
+            if (form) {
+                form.submit();
+            }
+        }
+    });
+}
+
+
+
+function toggleStatus(id) {
+    Swal.fire({
+        title: '¿Cambiar estado?',
+        text: "El producto cambiará entre activo e inactivo",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Sí, cambiar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('toggleId').value = id;
+            document.getElementById('toggleForm').submit();
+        }
+    });
+}
+
+function exportData() {
+    Swal.fire({
+        title: 'Exportar datos',
+        text: "Función de exportación en desarrollo",
+        icon: 'info',
+        confirmButtonText: 'Entendido'
+    });
+}
+
+function actualizarWorkflowProducto(id_producto) {
+    Swal.fire({
+        title: '¿Actualizar Workflow del producto?',
+        text: "Esta acción actualizará los estados de workflow de este producto a estado 2 (En Proceso). ¿Está seguro?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#28a745',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Sí, actualizar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Mostrar loading
+            Swal.fire({
+                title: 'Actualizando...',
+                text: 'Por favor espere mientras se actualiza el producto',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                showConfirmButton: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            // Hacer petición AJAX
+            fetch('modules/bodega/ajax_actualizar_workflow.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    action: 'actualizar_workflow_producto',
+                    id_producto: id_producto
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        title: '¡Éxito!',
+                        text: 'El producto se actualizó correctamente',
+                        icon: 'success',
+                        confirmButtonText: 'Entendido'
+                    }).then(() => {
+                        // Recargar la página para mostrar los cambios
+                        location.reload();
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Error',
+                        text: data.message || 'Hubo un error al actualizar el producto',
+                        icon: 'error',
+                        confirmButtonText: 'Entendido'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error de comunicación con el servidor',
+                    icon: 'error',
+                    confirmButtonText: 'Entendido'
+                });
+            });
+        }
+    });
+}
+
+function duplicarProducto(id_producto, nombre_producto) {
+    Swal.fire({
+        title: '¿Duplicar producto?',
+        html: `¿Está seguro de que desea duplicar el producto <strong>"${nombre_producto}"</strong>?<br><br>
+               <small class="text-muted">
+               <i class="fas fa-info-circle me-1"></i>
+               El producto duplicado tendrá:<br>
+               • Todos los campos duplicados (precios, descripciones, etc.)<br>
+               • <strong>id_producto_combinacion</strong> → null<br>
+               • <strong>codigo_producto</strong> → null<br>
+               • <strong>id_prestashop</strong> → null<br>
+               • <strong>id_workflow_estado_etiquetado</strong> → 2<br>
+               • <strong>id_workflow_estado_prestashop</strong> → 2<br>
+               • <strong>id_producto_estado</strong> → 3<br>
+               • Nuevo ID de producto (generado automáticamente)
+               </small>`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#6c757d',
+        cancelButtonColor: '#dc3545',
+        confirmButtonText: 'Sí, duplicar',
+        cancelButtonText: 'Cancelar',
+        width: '500px'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Mostrar loading
+            Swal.fire({
+                title: 'Duplicando...',
+                text: 'Por favor espere mientras se duplica el producto',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                showConfirmButton: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            // Hacer petición AJAX
+            fetch('modules/bodega/ajax_duplicar_producto.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    action: 'duplicar_producto',
+                    id_producto: id_producto
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        title: '¡Producto duplicado!',
+                        html: `El producto se duplicó correctamente.<br><br>
+                               <strong>Producto original:</strong> ID ${data.original_id}<br>
+                               <strong>Producto duplicado:</strong> ID ${data.nuevo_id}`,
+                        icon: 'success',
+                        confirmButtonText: 'Entendido'
+                    }).then(() => {
+                        // Recargar la página para mostrar el nuevo producto
+                        location.reload();
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Error',
+                        text: data.message || 'Hubo un error al duplicar el producto',
+                        icon: 'error',
+                        confirmButtonText: 'Entendido'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un error de comunicación con el servidor',
+                    icon: 'error',
+                    confirmButtonText: 'Entendido'
+                });
+            });
+        }
+    });
+}
+
+// Inicializar tooltips de Bootstrap para el Progress Tracker
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar todos los tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+    
+    // Event listener para botones de duplicar
+    document.querySelectorAll('.btn-duplicar').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var idProducto = this.getAttribute('data-producto-id');
+            var nombreProducto = this.getAttribute('data-producto-nombre');
+            duplicarProducto(idProducto, nombreProducto);
+        });
+    });
+});
+
+// --- Cambio de Precio ---
+document.querySelectorAll('.btn-cambio-precio').forEach(function(button) {
+    button.addEventListener('click', function() {
+        var idProducto = this.getAttribute('data-producto-id');
+        var nombreProducto = this.getAttribute('data-producto-nombre');
+        abrirModalCambioPrecio(idProducto, nombreProducto);
+    });
+});
+
+function abrirModalCambioPrecio(idProducto, nombreProducto) {
+    document.getElementById('cambioPrecioLoading').classList.remove('d-none');
+    document.getElementById('cambioPrecioError').classList.add('d-none');
+    document.getElementById('cambioPrecioPendiente').classList.add('d-none');
+    document.getElementById('formCambioPrecio').classList.add('d-none');
+    document.getElementById('btnGuardarCambioPrecio').disabled = true;
+
+    document.getElementById('cp_precio_nuevo_prestashop').value = '';
+    document.getElementById('cp_precio_nuevo_tienda').value = '';
+    document.getElementById('cp_comentario_registro').value = '';
+
+    var modal = new bootstrap.Modal(document.getElementById('modalCambioPrecio'));
+    modal.show();
+
+    fetch('modules/bodega/ajax_producto_cambio_precio.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'get_producto_precios', id_producto: idProducto })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('cambioPrecioLoading').classList.add('d-none');
+
+        if (!data.success) {
+            document.getElementById('cambioPrecioError').textContent = data.message;
+            document.getElementById('cambioPrecioError').classList.remove('d-none');
+            return;
+        }
+
+        if (data.tiene_cambio_pendiente) {
+            document.getElementById('cambioPrecioPendiente').classList.remove('d-none');
+            return;
+        }
+
+        document.getElementById('cp_id_producto').value = data.producto.id_producto;
+        document.getElementById('cp_nombre_producto').value = data.producto.nombre_producto || '';
+        document.getElementById('cp_codigo_producto').value = data.producto.codigo_producto || '';
+        document.getElementById('cp_precio_antiguo_tienda').value = formatearPrecio(data.producto.precio_tienda);
+        document.getElementById('cp_precio_antiguo_prestashop').value = formatearPrecio(data.producto.precio_prestashop);
+
+        document.getElementById('formCambioPrecio').classList.remove('d-none');
+        document.getElementById('btnGuardarCambioPrecio').disabled = false;
+    })
+    .catch(error => {
+        document.getElementById('cambioPrecioLoading').classList.add('d-none');
+        document.getElementById('cambioPrecioError').textContent = 'Error de comunicación con el servidor';
+        document.getElementById('cambioPrecioError').classList.remove('d-none');
+    });
+}
+
+document.getElementById('cp_precio_nuevo_prestashop').addEventListener('input', function() {
+    var precioPrestashop = parseInt(this.value) || 0;
+    document.getElementById('cp_precio_nuevo_tienda').value = precioPrestashop * 2;
+});
+
+document.getElementById('btnGuardarCambioPrecio').addEventListener('click', function() {
+    var idProducto = document.getElementById('cp_id_producto').value;
+    var precioNuevoPrestashop = parseInt(document.getElementById('cp_precio_nuevo_prestashop').value) || 0;
+    var precioNuevoTienda = parseInt(document.getElementById('cp_precio_nuevo_tienda').value) || 0;
+    var comentario = document.getElementById('cp_comentario_registro').value.trim();
+
+    if (!precioNuevoPrestashop || !precioNuevoTienda) {
+        Swal.fire({ icon: 'warning', title: 'Campos obligatorios', text: 'Debe ingresar el nuevo precio Prestashop.' });
+        return;
+    }
+    if (!comentario) {
+        Swal.fire({ icon: 'warning', title: 'Campos obligatorios', text: 'Debe ingresar un comentario explicando el cambio.' });
+        return;
+    }
+    if (precioNuevoTienda != (precioNuevoPrestashop * 2)) {
+        Swal.fire({ icon: 'warning', title: 'Validación de precios', text: 'El precio tienda debe ser el doble del precio Prestashop.' });
+        return;
+    }
+
+    Swal.fire({
+        title: '¿Registrar solicitud?',
+        html: 'Se enviará la solicitud de cambio de precio para revisión y aprobación.',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#0d6efd',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Sí, registrar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({ title: 'Registrando...', allowOutsideClick: false, showConfirmButton: false, didOpen: () => { Swal.showLoading(); } });
+
+            fetch('modules/bodega/ajax_producto_cambio_precio.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'registrar_cambio_precio',
+                    id_producto: idProducto,
+                    precio_nuevo_tienda: precioNuevoTienda,
+                    precio_nuevo_prestashop: precioNuevoPrestashop,
+                    comentario_registro: comentario
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    bootstrap.Modal.getInstance(document.getElementById('modalCambioPrecio')).hide();
+                    Swal.fire({ icon: 'success', title: 'Solicitud registrada', text: data.message, confirmButtonText: 'Entendido' });
+                } else {
+                    Swal.fire({ icon: 'error', title: 'Error', text: data.message });
+                }
+            })
+            .catch(error => {
+                Swal.fire({ icon: 'error', title: 'Error', text: 'Error de comunicación con el servidor' });
+            });
+        }
+    });
+});
+
+function formatearPrecio(valor) {
+    if (!valor) return '0';
+    return parseInt(valor).toLocaleString('es-CL');
+}
+
+// SweetAlert2 para mensajes de éxito
+</script>
+
+             </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <script>
+    // Auto-cerrar mensajes de error y advertencia después de 8 segundos
+    document.addEventListener('DOMContentLoaded', function() {
+        const alertsToAutoClose = document.querySelectorAll('.alert-danger, .alert-warning');
+        
+        alertsToAutoClose.forEach(function(alert) {
+            // Agregar una barra de progreso visual
+            const progressBar = document.createElement('div');
+            progressBar.style.cssText = 'position: absolute; bottom: 0; left: 0; height: 3px; background-color: rgba(255, 255, 255, 0.7); width: 100%; animation: shrink 8s linear;';
+            alert.style.position = 'relative';
+            alert.style.overflow = 'hidden';
+            alert.appendChild(progressBar);
+            
+            // Auto-cerrar después de 8 segundos
+            setTimeout(function() {
+                // Usar Bootstrap para cerrar la alerta con animación
+                const bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+                bsAlert.close();
+            }, 8000);
+        });
+    });
+    
+    // Agregar animación CSS para la barra de progreso
+    if (!document.getElementById('alert-auto-close-styles')) {
+        const style = document.createElement('style');
+        style.id = 'alert-auto-close-styles';
+        style.textContent = `
+            @keyframes shrink {
+                from { width: 100%; }
+                to { width: 0%; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+    </script>
+</body>
+</html> 
