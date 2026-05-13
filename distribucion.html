@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Ventas - DJOYAS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+/* ============================================================
+   VARIABLES
+   ============================================================ */
+:root {
+    --sidebar-width: 220px;
+    --sidebar-bg: #2b2b2b;
+    --sidebar-hover: #3a3a3a;
+    --sidebar-active: #444444;
+    --accent: #ffdbd1;
+    --body-bg: #f4f4f4;
+    --card-bg: #ffffff;
+    --text-main: #222222;
+    --text-muted: #888888;
+    --border: #e0e0e0;
+    --transition: all 0.2s ease;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--body-bg);
+    color: var(--text-main);
+    font-size: 0.875rem;
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 100vh;
+    width: var(--sidebar-width);
+    background: var(--sidebar-bg);
+    color: #ccc;
+    z-index: 1000;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid #3a3a3a;
+    min-height: 60px;
+}
+
+.sidebar-brand {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.sidebar-toggle {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 4px 6px;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.sidebar-toggle:hover { color: #fff; background: #3a3a3a; }
+
+/* Menú items */
+.sidebar-menu { flex: 1; padding: 0.5rem 0; }
+
+.sidebar-menu .nav-link {
+    color: #bbb;
+    padding: 0.55rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    font-size: 0.82rem;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    transition: var(--transition);
+    border-left: 3px solid transparent;
+}
+
+.sidebar-menu .nav-link:hover {
+    background: var(--sidebar-hover);
+    color: #fff;
+}
+
+.sidebar-menu .nav-link.active {
+    background: var(--sidebar-active);
+    color: #fff;
+    border-left-color: var(--accent);
+}
+
+.sidebar-menu .nav-link i {
+    width: 16px;
+    text-align: center;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.sidebar-section-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #666;
+    padding: 0.8rem 1.2rem 0.3rem;
+}
+
+/* Submenú */
+.sidebar-submenu {
+    background: #252525;
+}
+
+.sidebar-submenu .nav-link {
+    padding-left: 2.5rem;
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.sidebar-submenu .nav-link:hover { color: #fff; background: #333; }
+.sidebar-submenu .nav-link.active { color: #fff; border-left-color: var(--accent); }
+
+/* Footer usuario */
+.sidebar-footer {
+    padding: 0.8rem 1.2rem;
+    border-top: 1px solid #3a3a3a;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #999;
+    font-size: 0.78rem;
+}
+
+.sidebar-footer i { font-size: 1.2rem; color: #777; }
+
+/* Collapsed */
+.sidebar.collapsed { width: 54px; }
+.sidebar.collapsed .nav-text,
+.sidebar.collapsed .sidebar-brand,
+.sidebar.collapsed .sidebar-section-label,
+.sidebar.collapsed .ms-auto,
+.sidebar.collapsed .user-name { display: none; }
+.sidebar.collapsed .nav-link { justify-content: center; padding: 0.55rem; }
+.sidebar.collapsed .sidebar-submenu .nav-link { padding-left: 0; }
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+.main-content {
+    margin-left: var(--sidebar-width);
+    transition: var(--transition);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar.collapsed ~ .main-content { margin-left: 54px; }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.main-header {
+    background: var(--sidebar-bg);
+    padding: 0 1.5rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #3a3a3a;
+}
+
+.main-header h5 { color: #fff; margin: 0; font-size: 0.95rem; font-weight: 600; }
+
+.header-actions { display: flex; align-items: center; gap: 0.75rem; }
+
+.btn-icon {
+    background: #3a3a3a;
+    border: none;
+    color: #ccc;
+    width: 34px; height: 34px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    font-size: 0.85rem;
+}
+
+.btn-icon:hover { background: #4a4a4a; color: #fff; }
+
+.badge-notif {
+    position: absolute;
+    top: -4px; right: -4px;
+    background: #e74c3c;
+    color: white;
+    font-size: 0.6rem;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+}
+
+.user-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #3a3a3a;
+    border: none;
+    color: #ccc;
+    padding: 0.3rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.user-btn:hover { background: #4a4a4a; color: #fff; }
+
+/* ============================================================
+   CONTENT AREA
+   ============================================================ */
+.content-area {
+    flex: 1;
+    padding: 1.5rem;
+    background: var(--body-bg);
+}
+
+/* ============================================================
+   CARD BASE
+   ============================================================ */
+.dj-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.dj-card-header {
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fafafa;
+}
+
+.dj-card-header h6 {
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.dj-card-body { padding: 1.25rem; }
+
+/* ============================================================
+   PÁGINA: CABECERA + BOTONES
+   ============================================================ */
+.page-header {
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.page-header h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.page-header .subtitle {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+
+.page-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+/* Botones de acción */
+.btn-dj {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: var(--transition);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.btn-dj-dark    { background: var(--sidebar-bg); color: #fff; border-color: var(--sidebar-bg); }
+.btn-dj-dark:hover { background: #3a3a3a; color: #fff; }
+
+.btn-dj-outline { background: #fff; color: var(--text-main); border-color: var(--border); }
+.btn-dj-outline:hover { background: #f5f5f5; color: var(--text-main); }
+
+.btn-dj-danger  { background: #fff; color: #c0392b; border-color: #f5c6cb; }
+.btn-dj-danger:hover { background: #fdf2f2; }
+
+.btn-dj-success { background: #fff; color: #27ae60; border-color: #c3e6cb; }
+.btn-dj-success:hover { background: #f0faf4; }
+
+/* ============================================================
+   INFO DE DISTRIBUCIÓN
+   ============================================================ */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0;
+}
+
+.info-item {
+    padding: 0.85rem 1.25rem;
+}
+
+.info-item:last-child { border-right: none; }
+
+.info-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.info-value {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+/* Badges de estado */
+.badge-estado {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+.badge-preparacion { background: #fff3cd; color: #856404; }
+.badge-creandose   { background: #d1ecf1; color: #0c5460; }
+.badge-espera      { background: #9ACBFD; color: #323232; }
+.badge-enviado     { background: #d4edda; color: #155724; }
+
+/* ============================================================
+   FORMULARIO AGREGAR PRODUCTO
+   ============================================================ */
+.form-dj .form-control,
+.form-dj .form-select {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.82rem;
+    padding: 0.45rem 0.75rem;
+    transition: var(--transition);
+    color: var(--text-main);
+}
+
+.form-dj .form-control:focus,
+.form-dj .form-select:focus {
+    border-color: #aaa;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.06);
+}
+
+.form-dj .form-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+
+.btn-add-product {
+    background: var(--sidebar-bg);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.45rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    width: 100%;
+    justify-content: center;
+}
+
+.btn-add-product:hover { background: #3a3a3a; }
+
+/* Botones vista tabla/tarjetas */
+.btn-view {
+    background: #f0f0f0;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    border-radius: 5px;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.btn-view:hover { background: #e0e0e0; }
+
+/* ============================================================
+   TABLA DE PRODUCTOS
+   ============================================================ */
+.dj-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+}
+
+.dj-table thead th {
+    background: #f7f7f7;
+    border-bottom: 2px solid var(--border);
+    border-top: none;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.dj-table tbody td {
+    padding: 0.65rem 0.75rem;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+    color: var(--text-main);
+}
+
+.dj-table tbody tr:hover { background: #fafafa; }
+
+/* Celdas de sucursal */
+.dj-table th.sucursal-th,
+.dj-table td.sucursal-td {
+    background: #f5f8ff;
+    text-align: center;
+}
+
+/* Burbujas de cantidad por sucursal */
+.qty-bubble {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: #e9ecef;
+    color: var(--text-main);
+    font-weight: 700;
+    font-size: 0.82rem;
+    padding: 0 6px;
+}
+
+/* Producto SKU */
+.product-sku {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--text-main);
+    display: block;
+}
+
+.product-name {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 2px;
+}
+
+/* Imagen producto */
+.product-img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: #f5f5f5;
+}
+
+.product-img-placeholder {
+    width: 48px; height: 48px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: #f5f5f5;
+    display: flex; align-items: center; justify-content: center;
+    color: #ccc;
+    font-size: 1.2rem;
+}
+
+/* Botones de acciones en tabla */
+.action-btn {
+    width: 45px; height: 45px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.75rem;
+    text-decoration: none;
+}
+
+.action-btn:hover { background: #f0f0f0; color: var(--text-main); }
+.action-btn.danger:hover { background: #fdf2f2; color: #c0392b; border-color: #f5c6cb; }
+.action-btn.success:hover { background: #f0faf4; color: #27ae60; border-color: #c3e6cb; }
+.action-btn.primary:hover { background: #eef2ff; color: #3a55d0; border-color: #c5cff7; }
+
+/* ============================================================
+   ALERTAS
+   ============================================================ */
+.alert {
+    border-radius: 6px;
+    border: none;
+    padding: 0.75rem 1rem;
+    font-size: 0.82rem;
+}
+
+.alert-info    {     background: #ffdbd18c;
+    color: #323232;
+}
+.alert-warning { background: #fef9ec; color: #7d5a00; border: 1px solid #f0d070; }
+
+/* ============================================================
+   MODALES
+   ============================================================ */
+.modal-content { border-radius: 10px; border: 1px solid var(--border); box-shadow: 0 8px 30px rgba(0,0,0,0.12); }
+.modal-header  { background: #fafafa; border-bottom: 1px solid var(--border); padding: 1rem 1.25rem; }
+.modal-title   { font-size: 0.9rem; font-weight: 700; color: var(--text-main); }
+.modal-body    { padding: 1.25rem; }
+.modal-footer  { padding: 0.85rem 1.25rem; border-top: 1px solid var(--border); background: #fafafa; }
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #aaa; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+.mobile-menu-toggle {
+    display: none;
+    background: #3a3a3a;
+    border: none;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.sidebar-overlay {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 999; opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+}
+
+.sidebar-overlay.show { opacity: 1; pointer-events: auto; }
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle { display: block; }
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.show { transform: translateX(0); }
+    .main-content { margin-left: 0 !important; }
+    .content-area { padding: 1rem; }
+    .info-grid { grid-template-columns: 1fr 1fr; }
+    .info-item { border-right: none; border-bottom: 1px solid var(--border); }
+}
+
+/* ============================================================
+   SWEETALERT2
+   ============================================================ */
+.swal2-container { display: flex !important; align-items: center !important; justify-content: center !important; }
+.swal2-popup { border-radius: 10px !important; font-size: 0.85rem !important; }
+
+/* ============================================================
+   BARRA PROGRESO AUTO-CIERRE
+   ============================================================ */
+@keyframes shrink { from { width: 100%; } to { width: 0%; } }
+    </style>
+</head>
+<body>
+
+<div class="d-flex">
+
+    <!-- ============================================================
+         SIDEBAR
+         ============================================================ -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span class="sidebar-brand">DJOYAS</span>
+            <button class="sidebar-toggle" id="sidebarToggle" title="Colapsar menú">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div class="sidebar-menu">
+            <ul class="nav flex-column">
+
+                <!-- Dashboard -->
+                <li class="nav-item">
+                    <a class="nav-link" href="https://dixclientes.cl/djoyas/?page=dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span class="nav-text">Dashboard</span>
+                    </a>
+                </li>
+
+                <!-- Dashboard Bodega -->
+                <li class="nav-item">
+                    <a class="nav-link" href="https://dixclientes.cl/djoyas/?page=dashboard_bodega">
+                        <i class="fas fa-warehouse"></i>
+                        <span class="nav-text">Dashboard Bodega</span>
+                    </a>
+                </li>
+
+                <!-- Ventas -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#ventasSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="false">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="nav-text">Ventas</span>
+                        <i class="fas fa-chevron-down ms-auto" style="font-size:0.65rem;"></i>
+                    </a>
+                    <div class="collapse sidebar-submenu" id="ventasSubmenu">
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a class="nav-link" href="https://dixclientes.cl/djoyas/?page=en_proceso"><i class="fas fa-clock"></i><span class="nav-text">En proceso</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="https://dixclientes.cl/djoyas/?page=transacciones"><i class="fas fa-receipt"></i><span class="nav-text">Transacciones</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="https://dixclientes.cl/djoyas/?page=cierre_dia_resumen"><i class="fas fa-chart-line"></i><span class="nav-text">Resumen del Día</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="https://dixclientes.cl/djoyas/?page=cierre_dia_listado"><i class="fas fa-calendar-check"></i><span class="nav-text">Historial Cierres</span></a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Clientes -->
+                <li class="nav-item">
+                    <a class="nav-link" href="https://dixclientes.cl/djoyas/?page=clientes">
+                        <i class="fas fa-users"></i>
+                        <span class="nav-text">Clientes</span>
+                    </a>
+                </li>
+
+                <!-- Reportes -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#reportesSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="false">
+                        <i class="fas fa-chart-bar"></i>
+                        <span class="nav-text">Reportes</span>
+                        <i class="fas fa-chevron-down ms-auto" style="font-size:0.65rem;"></i>
+                    </a>
+                    <div class="collapse sidebar-submenu" id="reportesSubmenu">
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a class="nav-link" href="https://dixclientes.cl/djoyas/?page=matriz_venta"><i class="fas fa-table"></i><span class="nav-text">Matriz de Venta</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="https://dixclientes.cl/djoyas/?page=dash_analitico_interactivo_ventas"><i class="fas fa-chart-pie"></i><span class="nav-text">Dashboard Analítico</span></a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Gestión -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#gestionSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="false">
+                        <i class="fas fa-cogs"></i>
+                        <span class="nav-text">Gestión</span>
+                        <i class="fas fa-chevron-down ms-auto" style="font-size:0.65rem;"></i>
+                    </a>
+                    <div class="collapse sidebar-submenu" id="gestionSubmenu">
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a class="nav-link" href="?page=gastos_listado"><i class="fas fa-wallet"></i><span class="nav-text">Gastos</span></a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Bodega (activo) -->
+                <li class="nav-item">
+                    <a class="nav-link active" href="#bodegaSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="true">
+                        <i class="fas fa-boxes"></i>
+                        <span class="nav-text">Bodega</span>
+                        <i class="fas fa-chevron-down ms-auto" style="font-size:0.65rem;"></i>
+                    </a>
+                    <div class="collapse show sidebar-submenu" id="bodegaSubmenu">
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><a class="nav-link" href="?page=productos"><i class="fas fa-boxes"></i><span class="nav-text">Productos</span></a></li>
+                            <li class="nav-item"><a class="nav-link active" href="?page=distribucion"><i class="fas fa-truck"></i><span class="nav-text">Distribución</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="?page=distribucion_parametros_porcentaje_sucursales"><i class="fas fa-percentage"></i><span class="nav-text">Editar % Sucursal</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="?page=producto_cambio_precio_revisar"><i class="fas fa-dollar-sign"></i><span class="nav-text">Solicitud Cambios de Precios</span></a></li>
+                            <li class="nav-item"><a class="nav-link" href="?page=producto_proveedor"><i class="fas fa-truck-loading"></i><span class="nav-text">Proveedores</span></a></li>
+                            <!-- Maestros -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="#maestrosSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="false">
+                                    <i class="fas fa-cogs"></i><span class="nav-text">Maestros</span>
+                                    <i class="fas fa-chevron-down ms-auto" style="font-size:0.65rem;"></i>
+                                </a>
+                                <div class="collapse sidebar-submenu" id="maestrosSubmenu" style="padding-left: 1rem;">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item"><a class="nav-link" href="?page=producto_caja"><i class="fas fa-box"></i><span class="nav-text">Cajas Bodegaje</span></a></li>
+                                        <li class="nav-item"><a class="nav-link" href="?page=producto_material"><i class="fas fa-cube"></i><span class="nav-text">Materiales</span></a></li>
+                                        <li class="nav-item"><a class="nav-link" href="?page=producto_tipo"><i class="fas fa-tags"></i><span class="nav-text">Tipos</span></a></li>
+                                        <li class="nav-item"><a class="nav-link" href="?page=producto_subtipo"><i class="fas fa-tag"></i><span class="nav-text">Subtipos</span></a></li>
+                                        <li class="nav-item"><a class="nav-link" href="?page=producto_combinacion"><i class="fas fa-layer-group"></i><span class="nav-text">Combinaciones</span></a></li>
+                                        <li class="nav-item"><a class="nav-link" href="?page=producto_coleccion"><i class="fas fa-layer-group"></i><span class="nav-text">Colecciones</span></a></li>
+                                        <li class="nav-item"><a class="nav-link" href="?page=producto_estilo"><i class="fas fa-palette"></i><span class="nav-text">Estilos</span></a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="sidebar-footer">
+            <i class="fas fa-user-circle"></i>
+            <span class="user-name">sandra.conejeros</span>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         MAIN CONTENT
+         ============================================================ -->
+    <div class="main-content flex-grow-1">
+
+        <!-- Header -->
+        <header class="main-header">
+            <div class="d-flex align-items-center gap-3">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></button>
+                <h5>Detalle de Distribución</h5>
+            </div>
+            <div class="header-actions">
+                <!-- Notificaciones -->
+                <div class="dropdown">
+                    <button class="btn-icon" data-bs-toggle="dropdown">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge-notif">3</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" style="min-width:280px; font-size:0.82rem;">
+                        <li><h6 class="dropdown-header">Notificaciones</h6></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-info-circle text-info me-2"></i>Nueva venta registrada</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-exclamation-triangle text-warning me-2"></i>Stock bajo en productos</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user-plus text-success me-2"></i>Nuevo cliente registrado</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-center" href="#">Ver todas</a></li>
+                    </ul>
+                </div>
+                <!-- Usuario -->
+                <div class="dropdown">
+                    <button class="user-btn" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-circle"></i>
+                        sandra.conejeros
+                        <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" style="font-size:0.82rem;">
+                        <li><h6 class="dropdown-header">Administración</h6></li>
+                        <li><a class="dropdown-item" href="?page=perfil"><i class="fas fa-user me-2"></i>Mi Perfil</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="logout.php"><i class="fas fa-sign-out-alt me-2"></i>Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content -->
+        <div class="content-area">
+
+            <!-- ===== CABECERA DE PÁGINA ===== -->
+            <div class="page-header">
+                <div>
+                    <h4>Nueva Distribución</h4>
+                    <div class="subtitle">Gestión de productos para la distribución: Test matias</div>
+                </div>
+                <div class="page-actions">
+                    <button class="btn-dj btn-dj-danger" onclick="deleteDistribucion()">
+                        <i class="fas fa-trash"></i> Eliminar Distribución
+                    </button>
+                    <button class="btn-dj btn-dj-dark" onclick="enviarBodega()">
+                        <i class="fas fa-truck"></i> Enviar a Bodega
+                    </button>
+                </div>
+            </div>
+
+            <!-- ===== INFO DISTRIBUCIÓN ===== -->
+            <div class="dj-card mb-3">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">ID</div>
+                        <div class="info-value">#265</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Título</div>
+                        <div class="info-value">Test matias</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Estado</div>
+                        <div class="info-value">
+                            <span class="badge-estado badge-creandose">Creándose</span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Fecha Creación</div>
+                        <div class="info-value">12/05/2026 14:10</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Fecha Despacho Prog.</div>
+                        <div class="info-value">05/06/2026</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Comentario</div>
+                        <div class="info-value">a</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- form oculto -->
+            <form method="POST" id="addProductForm" style="display:none;">
+                <input type="hidden" name="action" value="add_product">
+                <input type="hidden" name="id_producto" id="id_producto">
+                <input type="hidden" name="cantidad" id="cantidad">
+            </form>
+
+            <!-- botón visible -->
+            <div class="text-center mb-3">
+                <button type="button" class="btn-dj btn-dj-dark" onclick="abrirModalAgregarProducto()">
+                    <i class="fas fa-plus"></i> Agregar Producto
+                </button>
+            </div>
+
+            <!-- ===== TABLA DE PRODUCTOS ===== -->
+            <div class="dj-card">
+                <div class="dj-card-header">
+                    <h6><i class="fas fa-box me-2"></i>Productos en la Distribución</h6>
+                    <span style="font-size:0.75rem; color: var(--text-muted);">1 producto(s) agregado(s)</span>
+                </div>
+                <div class="table-responsive">
+                    <table class="dj-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Imagen</th>
+                                <th>Producto</th>
+                                <th>Nro Bolsa</th>
+                                <th>Precio Tienda</th>
+                                <th>Stock Disp.</th>
+                                <th>Cant. Programada</th>
+                                <th class="sucursal-th">Temuco</th>
+                                <th class="sucursal-th">Cochrane</th>
+                                <th class="sucursal-th">Caracol</th>
+                                <th class="sucursal-th">Santiago</th>
+                                <th class="sucursal-th">Prestashop</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span style="color:var(--text-muted); font-size:0.78rem;">#3594</span></td>
+                                <td>
+                                    <div class="product-img-placeholder">
+                                        <i class="fas fa-gem"></i>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="product-sku">PANAC101239000</span>
+                                    <span class="product-name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; max-width: 220px;">
+    Anillo de Plata 925 Diseño Abierto Doble Punta con Circón, Estrella y Concha Marina Esmaltada
+</span>
+                                </td>
+<td>31</td>
+<td>$9.800</td>
+<td>
+    <span class="qty-bubble" style="background:#d4edda; color:#155724;">120</span>
+</td>
+                                <td>
+                                    <span class="qty-bubble" style="background:#cfe2ff; color:#084298;">1</span>
+                                </td>
+                                <td class="sucursal-td"><span class="qty-bubble">—</span></td>
+<td class="sucursal-td"><span class="qty-bubble">—</span></td>
+<td class="sucursal-td"><span class="qty-bubble">1</span></td>
+<td class="sucursal-td"><span class="qty-bubble">—</span></td>
+<td class="sucursal-td"><span class="qty-bubble">—</span></td>
+                                <td>
+                                    <span class="badge-estado badge-espera">En Espera</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex gap-1">
+                                        <button class="action-btn primary"
+                                                onclick="openEditQuantityModal(3594, 'Anillo de Plata 925 Diseño Abierto Doble Punta con Circón, Estrella y Concha Marina Esmaltada', 1, 120)"
+                                                title="Editar cantidad">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="action-btn success"
+                                                onclick="openAssignModal(3594, 'Anillo de Plata 925 Diseño Abierto Doble Punta con Circón, Estrella y Concha Marina Esmaltada', 1)"
+                                                title="Asignar sucursales" data-readonly="false">
+                                            <i class="fas fa-store"></i>
+                                        </button>
+                                        <button class="action-btn danger"
+                                                onclick="deleteProduct(3594)"
+                                                title="Eliminar">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div><!-- /content-area -->
+    </div><!-- /main-content -->
+</div><!-- /d-flex -->
+
+
+<!-- ============================================================
+     MODAL: Editar Cantidad
+     ============================================================ -->
+<div class="modal fade" id="editQuantityModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-edit me-2"></i>Editar Cantidad a Distribuir</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" id="editQuantityForm">
+                <input type="hidden" name="action" value="edit_quantity">
+                <input type="hidden" name="detalle_id" id="edit_detalle_id">
+                <div class="modal-body form-dj">
+                    <div class="alert alert-info mb-3">
+                        <strong>Producto:</strong> <span id="edit_producto_nombre"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Cantidad Actual</label>
+                        <input type="number" class="form-control" id="edit_cantidad_actual" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nueva_cantidad" class="form-label">Nueva Cantidad <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" id="nueva_cantidad" name="nueva_cantidad" min="1" required>
+                        <small style="color:var(--text-muted); font-size:0.75rem;">
+                            Stock disponible: <strong id="edit_stock_disponible"></strong>
+                        </small>
+                    </div>
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-1"></i>
+                        Al cambiar la cantidad, las asignaciones a sucursales se recalcularán automáticamente.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-dj btn-dj-outline" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn-dj btn-dj-dark"><i class="fas fa-save me-1"></i>Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     MODAL: Asignar Sucursales
+     ============================================================ -->
+<div class="modal fade" id="assignModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Asignar a Sucursales</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="modalProductInfo" class="alert alert-info mb-3"></div>
+                <div id="assignmentContent"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-dj btn-dj-outline" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn-dj btn-dj-dark" onclick="saveAssignments()"><i class="fas fa-save me-1"></i>Guardar Asignaciones</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Formularios ocultos -->
+<form id="deleteProductForm"      method="POST" style="display:none;"><input type="hidden" name="action" value="delete_product"><input type="hidden" name="detalle_id" id="deleteDetalleId"></form>
+<form id="enviarBodegaForm"       method="POST" style="display:none;"><input type="hidden" name="action" value="enviar_bodega"></form>
+<form id="deleteDistribucionForm" method="POST" style="display:none;"><input type="hidden" name="action" value="delete_distribucion"></form>
+
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+/* ---- Variables globales ---- */
+let currentDetalleId = null;
+let currentCantidadTotal = 0;
+
+/* ---- Sidebar escritorio ---- */
+document.getElementById('sidebarToggle').addEventListener('click', function () {
+    document.getElementById('sidebar').classList.toggle('collapsed');
+});
+
+/* ---- Sidebar móvil ---- */
+document.getElementById('mobileMenuToggle').addEventListener('click', function () {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('show');
+    let overlay = document.querySelector('.sidebar-overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.className = 'sidebar-overlay';
+        document.body.appendChild(overlay);
+        overlay.addEventListener('click', function () {
+            sidebar.classList.remove('show');
+            overlay.classList.remove('show');
+        });
+    }
+    overlay.classList.toggle('show');
+});
+
+/* ---- Modal editar cantidad ---- */
+function openEditQuantityModal(detalleId, productoNombre, cantidadActual, stockDisponible) {
+    document.getElementById('edit_detalle_id').value      = detalleId;
+    document.getElementById('edit_producto_nombre').textContent = productoNombre;
+    document.getElementById('edit_cantidad_actual').value = cantidadActual;
+    document.getElementById('edit_stock_disponible').textContent = stockDisponible;
+    document.getElementById('nueva_cantidad').value       = cantidadActual;
+    document.getElementById('nueva_cantidad').max         = stockDisponible;
+    new bootstrap.Modal(document.getElementById('editQuantityModal')).show();
+}
+
+/* ---- Selección masiva ---- */
+function openMassiveSelection() {
+    const popup = window.open('modules/bodega/distribucion/distribucion_productos_seleccion_masiva.php?id=265', 'seleccionMasiva', 'width=1200,height=800,scrollbars=yes,resizable=yes');
+    if (popup) popup.focus();
+    else alert('Permita las ventanas emergentes para usar esta función.');
+}
+
+function openMassiveSelectionCards() {
+    const popup = window.open('seleccion_masiva_cards.html', 'seleccionMasivaCards', 'width=1400,height=900,scrollbars=yes,resizable=yes');
+    if (popup) popup.focus();
+}
+
+/* ---- Validación select producto ---- */
+document.getElementById('id_producto').addEventListener('change', function () {
+    const cantidadInput = document.getElementById('cantidad');
+    const stock = parseInt(this.options[this.selectedIndex].dataset.stock || 0);
+    cantidadInput.value = '';
+    if (stock > 0) { cantidadInput.max = stock; cantidadInput.placeholder = `Máximo: ${stock}`; }
+    else           { cantidadInput.max = ''; cantidadInput.placeholder = 'Sin stock'; }
+});
+
+/* ---- Validación submit agregar ---- */
+document.getElementById('addProductForm').addEventListener('submit', function (e) {
+    const producto      = document.getElementById('id_producto');
+    const cantidad      = document.getElementById('cantidad');
+    const stock         = parseInt(producto.options[producto.selectedIndex].dataset.stock || 0);
+    const cantidadValue = parseInt(cantidad.value || 0);
+    if (!producto.value)        { e.preventDefault(); alert('Debe seleccionar un producto.'); return; }
+    if (cantidadValue <= 0)     { e.preventDefault(); alert('La cantidad debe ser mayor a 0.'); return; }
+    if (cantidadValue > stock)  { e.preventDefault(); alert(`La cantidad no puede superar el stock disponible (${stock}).`); return; }
+});
+
+/* ---- Eliminar producto ---- */
+function deleteProduct(detalleId) {
+    if (typeof Swal !== 'undefined') {
+        Swal.fire({
+            title: '¿Eliminar producto?',
+            text: 'Esta acción eliminará el producto y todas sus asignaciones de sucursales.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#c0392b',
+            cancelButtonColor: '#555',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('deleteDetalleId').value = detalleId;
+                document.getElementById('deleteProductForm').submit();
+            }
+        });
+    } else {
+        if (confirm('¿Eliminar este producto y sus asignaciones?')) {
+            document.getElementById('deleteDetalleId').value = detalleId;
+            document.getElementById('deleteProductForm').submit();
+        }
+    }
+}
+
+/* ---- Modal asignar sucursales ---- */
+function openAssignModal(detalleId, nombreProducto, cantidadTotal) {
+    currentDetalleId     = detalleId;
+    currentCantidadTotal = cantidadTotal;
+    const buttonElement  = event.target.closest('button');
+    const isReadonly     = buttonElement && buttonElement.getAttribute('data-readonly') === 'true';
+
+    document.getElementById('modalProductInfo').innerHTML =
+        `<strong>Producto:</strong> ${nombreProducto}<br><strong>Cantidad total:</strong> ${cantidadTotal}
+         ${isReadonly ? '<br><span class="badge-estado badge-espera">Solo lectura</span>' : ''}`;
+
+    loadAssignments(detalleId, isReadonly);
+    new bootstrap.Modal(document.getElementById('assignModal')).show();
+}
+
+function loadAssignments(detalleId, isReadonly = false) {
+    const content = document.getElementById('assignmentContent');
+    content.innerHTML = '<div class="text-center py-4"><div class="spinner-border" role="status"></div></div>';
+
+    fetch(`modules/bodega/distribucion/ajax/load_assignments.php?detalle_id=${detalleId}&cantidad_total=${currentCantidadTotal}&readonly=${isReadonly ? '1' : '0'}`)
+        .then(r => r.text())
+        .then(html => {
+            content.innerHTML = html;
+            if (isReadonly) {
+                const saveBtn = document.querySelector('#assignModal .btn-dj-dark');
+                if (saveBtn) saveBtn.style.display = 'none';
+            }
+            content.querySelectorAll('script').forEach(script => {
+                const s = document.createElement('script');
+                s.textContent = script.textContent;
+                document.head.appendChild(s);
+                setTimeout(() => document.head.removeChild(s), 100);
+            });
+        })
+        .catch(() => { content.innerHTML = '<div class="alert alert-danger">Error al cargar las asignaciones.</div>'; });
+}
+
+function saveAssignments() {
+    if (!window.obtenerAsignaciones) { alert('Error: función no disponible.'); return; }
+    const assignments = window.obtenerAsignaciones();
+    const formData    = new FormData();
+    formData.append('detalle_id',    currentDetalleId);
+    formData.append('cantidad_total', currentCantidadTotal);
+    formData.append('assignments',   JSON.stringify(assignments));
+
+    fetch('modules/bodega/distribucion/ajax/save_assignments.php', { method: 'POST', body: formData })
+        .then(r => r.json())
+        .then(data => {
+            if (data.success) {
+                bootstrap.Modal.getInstance(document.getElementById('assignModal'))?.hide();
+                alert('Asignaciones guardadas exitosamente.');
+                location.reload();
+            } else { alert('Error: ' + data.message); }
+        })
+        .catch(() => alert('Error al guardar.'));
+}
+
+/* ---- Funciones globales del modal ---- */
+window.agregar = function () {
+    const select = document.getElementById('nuevaSucursal');
+    const input  = document.getElementById('nuevaCantidad');
+    if (!select?.value)               { alert('Seleccione una sucursal.'); return; }
+    const cantidad = parseInt(input?.value);
+    if (!cantidad || cantidad <= 0)   { alert('Ingrese una cantidad válida.'); return; }
+
+    const sucursalId     = select.value;
+    const sucursalNombre = select.options[select.selectedIndex].text;
+
+    const html = `
+        <div class="assignment-row row mb-3 p-3 border rounded" data-sucursal="${sucursalId}" style="background:#fafafa;">
+            <div class="col-md-6"><label class="form-label fw-semibold" style="font-size:0.8rem;">Sucursal</label>
+                <div style="font-size:0.85rem; font-weight:600;">${sucursalNombre}</div></div>
+            <div class="col-md-4"><label class="form-label fw-semibold" style="font-size:0.8rem;">Cantidad</label>
+                <input type="number" class="form-control cantidad-asignada" value="${cantidad}" min="1" style="font-size:0.82rem;"></div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="button" class="btn btn-sm btn-outline-danger w-100" onclick="window.eliminar(this)">
+                    <i class="fas fa-trash"></i></button></div>
+        </div>`;
+
+    document.getElementById('nuevaAsignacion')?.insertAdjacentHTML('beforebegin', html);
+    select.value = '';
+    input.value  = '1';
+    select.querySelector(`option[value="${sucursalId}"]`)?.remove();
+};
+
+window.eliminar = function (button) {
+    if (!confirm('¿Eliminar esta asignación?')) return;
+    const fila       = button.closest('.assignment-row');
+    const sucursalId = fila.getAttribute('data-sucursal');
+    const nombre     = fila.querySelector('[style*="font-weight:600"]').textContent.trim();
+    const select     = document.getElementById('nuevaSucursal');
+    const opt        = document.createElement('option');
+    opt.value       = sucursalId;
+    opt.textContent = nombre;
+    select.appendChild(opt);
+    fila.remove();
+};
+
+/* ---- Enviar a bodega ---- */
+function enviarBodega() {
+    if (typeof Swal !== 'undefined') {
+        Swal.fire({
+            title: '¿Enviar a Bodega?',
+            text: 'Esta distribución será enviada a bodega para su procesamiento.',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#27ae60',
+            cancelButtonColor: '#555',
+            confirmButtonText: 'Sí, enviar',
+            cancelButtonText: 'Cancelar'
+        }).then(r => { if (r.isConfirmed) document.getElementById('enviarBodegaForm').submit(); });
+    } else {
+        if (confirm('¿Enviar esta distribución a bodega?')) document.getElementById('enviarBodegaForm').submit();
+    }
+}
+
+/* ---- Eliminar distribución ---- */
+function deleteDistribucion() {
+    if (typeof Swal !== 'undefined') {
+        Swal.fire({
+            title: '¿Eliminar distribución?',
+            text: 'Esta acción eliminará todos los productos y asignaciones asociadas. No se puede deshacer.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#c0392b',
+            cancelButtonColor: '#555',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then(r => { if (r.isConfirmed) document.getElementById('deleteDistribucionForm').submit(); });
+    } else {
+        if (confirm('¿Eliminar esta distribución y todos sus productos?')) document.getElementById('deleteDistribucionForm').submit();
+    }
+}
+
+/* ---- Auto-cierre alertas (8 seg) ---- */
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.alert-danger, .alert-warning').forEach(function (alert) {
+        const bar = document.createElement('div');
+        bar.style.cssText = 'position:absolute;bottom:0;left:0;height:3px;background:rgba(0,0,0,0.15);width:100%;animation:shrink 8s linear;';
+        alert.style.position = 'relative';
+        alert.style.overflow = 'hidden';
+        alert.appendChild(bar);
+        setTimeout(() => bootstrap.Alert.getOrCreateInstance(alert)?.close(), 8000);
+    });
+});
+
+function abrirModalAgregarProducto() {
+    openMassiveSelection();
+}
+
+</script>
+</body>
+</html>
